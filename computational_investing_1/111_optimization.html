@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="Docutils 0.11: http://docutils.sourceforge.net/" />
-<title>Notes from Computational Investing I</title>
+<title></title>
 <style type="text/css">
 
 /*
@@ -338,20 +338,132 @@ ul.auto-toc {
 </style>
 </head>
 <body>
-<div class="document" id="notes-from-computational-investing-i">
-<h1 class="title">Notes from Computational Investing I</h1>
+<div class="document">
 
-<p><a class="reference external" href="https://www.coursera.org/course/compinvesting1">Computational Investing I at Coursera</a></p>
-<p><a class="reference external" href="041_intrinsic_value.html">041 Intrinsic Value</a></p>
-<p><a class="reference external" href="042_news.html">042 News</a></p>
-<p><a class="reference external" href="043_fundamental_analysis.html">043 Fundamental Analysis</a></p>
-<p><a class="reference external" href="051_numpy1.html">051 Numpy</a></p>
-<p><a class="reference external" href="071_capital_assets_pricing_model.html">071 Capital Assets Pricing Model</a></p>
-<p><a class="reference external" href="072_CAPM_beta.html">072 CAPM Beta</a></p>
-<p><a class="reference external" href="073_how_hedge_funds_use_CAPM.html">073 How Hedge Funds use CAPM</a></p>
-<p><a class="reference external" href="091_efficient_market_hypotesis.html">091 Efficient Market Hypotesis</a></p>
-<p><a class="reference external" href="111_optimization.html">111 Optimization</a></p>
-<p><a class="reference external" href="171_QSTK_intro.html">171 QSTK Intro</a></p>
+
+<div class="section" id="optimization-and-efficient-frontier">
+<h1>111 Optimization and Efficient Frontier</h1>
+<p>What is optimization?</p>
+<blockquote>
+<p>Given:</p>
+<blockquote>
+<ul class="simple">
+<li>A set of equities</li>
+<li>Target return</li>
+</ul>
+</blockquote>
+<p>Find:</p>
+<blockquote>
+<ul class="simple">
+<li>Allocation to each equity that minimizes risk</li>
+</ul>
+</blockquote>
+</blockquote>
+<p>What is risk? Different measurements for risk</p>
+<blockquote>
+<ul class="simple">
+<li>Volatility = risk</li>
+<li>Standard deviation of (daily) returns</li>
+<li>Draw-down</li>
+</ul>
+</blockquote>
+<p>Consider equities in two dimensions:</p>
+<blockquote>
+<ul class="simple">
+<li>Risk vs return</li>
+<li>The portfolio may lie away from the equities cloud<ul>
+<li>The risk/return are not exactly a linear combination of the equities</li>
+<li>Harry Markowitz</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>Inputs and Outputs for an optimizer</p>
+<blockquote>
+<ul class="simple">
+<li>Inputs<ul>
+<li>Expected return for each equity</li>
+<li>Volatility (risk) for each equity</li>
+<li>Target return</li>
+<li>Covariance matrix<ul>
+<li>For each equity how it varies related to the other equities</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Output<ul>
+<li>Portfolio weights that minimize risk for target return</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>Correlation and covariance between equities:</p>
+<blockquote>
+<ul class="simple">
+<li>Look at the correlation of daily returns of different stocks.</li>
+<li>Some equities may be negative correlated / move in opposite directions.</li>
+<li>By combining them we can reduce risk</li>
+</ul>
+</blockquote>
+</div>
+<div class="section" id="efficient-frontier">
+<h1>Efficient Frontier</h1>
+<blockquote>
+<ul class="simple">
+<li>Lower risk by combining anti-correlated equities</li>
+<li>There are infinite optimized portfolios:<ul>
+<li>One for every return</li>
+<li>The efficient frontier is the line of optimum portfolios<ul>
+<li>There are 3 main points in the efficient frontier:<ul>
+<li>Point of max return = 100% of equity of max return</li>
+<li>Lowest risk: may not guarantee positive return</li>
+<li>Max sharp ratio: in the middle, usually the most interesting point</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+</div>
+<div class="section" id="how-optimizers-work">
+<h1>How optimizers work</h1>
+<ul class="simple">
+<li>QSTK tutorial 8</li>
+</ul>
+<p>General idea:</p>
+<blockquote>
+<ul class="simple">
+<li>Define variables<ul>
+<li>Equity weights</li>
+</ul>
+</li>
+<li>Define constraints<ul>
+<li>Min or max weights</li>
+</ul>
+</li>
+<li>Define optimization criteria<ul>
+<li>Function of weights</li>
+</ul>
+</li>
+<li>Algorithm:<ul>
+<li>Tweak weights</li>
+<li>Check constraints</li>
+<li>OK?</li>
+<li>Call function</li>
+<li>Repeat</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>QSTK uses CVXOPT</p>
+<blockquote>
+<ul class="simple">
+<li>Convex optimization, convex function</li>
+</ul>
+</blockquote>
+</div>
 </div>
 </body>
 </html>
