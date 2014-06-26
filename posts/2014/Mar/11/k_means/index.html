@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>K Means - The Technoprom Core</title>
+        <meta charset="utf-8" />
+        <!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />-->
+        <link href="http://javcasas.github.io/theme/style.css" rel="stylesheet" />
+        <!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> -->
+    </head>
+
+    <body id="index" class="archive">
+        <div class="container">
+            <div class="header">
+                <ul class="nav nav-pills pull-right">
+                    <li class=""><a href="http://javcasas.github.io">Home</a></li>
+                    <li><a href="http://javcasas.github.io/archives.html">Archives</a></li>
+                </ul>
+                <h3 class="text-muted"><a href="http://javcasas.github.io">The Technoprom Core</a></h3>
+				<h2 class="text-muted">Advanced and not-so-advanced technology</h2>
+            </div>
+<section id="content" class="article content">
+  <header>
+    <h2 class="entry-title">
+      <a href="http://javcasas.github.io/posts/2014/Mar/11/k_means/" rel="bookmark"
+         title="Permalink to K Means">K Means</a></h2>
+ 
+  </header>
+  
+     
+  <div class="entry-content">
+    <div class="section" id="introduction">
+<h2>Introduction</h2>
+<p>K Means is an algorithm of the family of unsupervised learning algorithms. It separates a cloud of points into several groups.</p>
+</div>
+<div class="section" id="algorithm">
+<h2>Algorithm</h2>
+<p>K Means divides the space in regions the same way a Voronoi diagram does. The algorithm is really simple:</p>
+<pre class="literal-block">
+Initialise the K means to random points
+Repeat until convergence:
+    For each point in the data set:
+        Assign the point to its nearest K mean
+    For each K mean:
+        Move the K mean to the average location of its assigned points
+</pre>
+</div>
+<div class="section" id="example-code">
+<h2>Example code</h2>
+<p>The following Python program implements K Means clustering in a 2D environment. It uses PyGame for visualisation. First it creates several random clouds of points and then it triers to fit several K means to them. Note that not every cloud of points can easily get a K-means clasification, and not every K-means clasification is actually useful.</p>
+<p><a class="reference external" href="/downloads/k_means.py">k_means.py</a></p>
+</div>
+
+  </div><!-- /.entry-content -->
+   <footer class="post-info text-muted">
+    Posted on <abbr class="published" title="2014-03-11T22:20:00">
+      Tue 11 March 2014
+    </abbr>
+    <address class="vcard author">
+      by <a class="url fn" href="http://javcasas.github.io/author/javier-casas.html">Javier Casas</a>
+    </address> in <a href="http://javcasas.github.io/category/machine-learning.html">Machine Learning</a>
+    <br/>Tagged <a href="http://javcasas.github.io/tag/machine-learning.html">machine learning </a><a href="http://javcasas.github.io/tag/ml.html">ml </a><a href="http://javcasas.github.io/tag/unsupervised-learning.html">unsupervised learning </a>  </footer><!-- /.post-info -->
+</section>
+            <footer id="contentinfo" class="footer">
+                    <nav class="pull-right bottom-nav">
+                        <!--<a href="http://javcasas.github.io/None">RSS</a>-->
+                    </nav>
+                    <address id="about" class="vcard body">
+                    &copy; <a href="http://javcasas.github.io">The Technoprom Core</a> 2014. All rights reserved. Proudly powered by <a href="http://getpelican.com/">Pelican</a>
+                    </address><!-- /#about -->
+            </footer><!-- /#contentinfo -->
+        </div><!-- container -->
+    </body>
+</html>

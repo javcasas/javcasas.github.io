@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>073 How hedge funds use CAPM - The Technoprom Core</title>
+        <meta charset="utf-8" />
+        <!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />-->
+        <link href="http://javcasas.github.io/theme/style.css" rel="stylesheet" />
+        <!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> -->
+    </head>
+
+    <body id="index" class="archive">
+        <div class="container">
+            <div class="header">
+                <ul class="nav nav-pills pull-right">
+                    <li class=""><a href="http://javcasas.github.io">Home</a></li>
+                    <li><a href="http://javcasas.github.io/archives.html">Archives</a></li>
+                </ul>
+                <h3 class="text-muted"><a href="http://javcasas.github.io">The Technoprom Core</a></h3>
+				<h2 class="text-muted">Advanced and not-so-advanced technology</h2>
+            </div>
+<section id="content" class="article content">
+  <header>
+    <h2 class="entry-title">
+      <a href="http://javcasas.github.io/posts/2014/Jun/11/073_capm_hedge_funds/" rel="bookmark"
+         title="Permalink to 073 How hedge funds use CAPM">073 How hedge funds use CAPM</a></h2>
+ 
+  </header>
+  
+     
+  <div class="entry-content">
+    <p>The expected excess returns are proportional to <span class="formula"><i>β</i></span>
+, <span class="formula"><i>β</i> &gt; 1</span>
+</p>
+<blockquote>
+<ul class="simple">
+<li>Greater <span class="formula"><i>β</i></span>
+ = greater risk</li>
+</ul>
+</blockquote>
+<p>The <span class="formula"><i>β</i></span>
+ of a portfolio = weighted sum of <span class="formula"><i>β</i></span>
+ of components:</p>
+<div class="formula">
+<i>r</i><sub><i>portfolio</i></sub> = <span class="limits"><span class="limit"><span class="symbol">∑</span></span></span><i>w</i><sub><i>i</i></sub>*<i>r</i><sub><i>i</i></sub>
+</div>
+<div class="formula">
+<i>β</i><sub><i>portfolio</i></sub> = <span class="limits"><span class="limit"><span class="symbol">∑</span></span></span><i>w</i><sub><i>i</i></sub>*<i>β</i><sub><i>i</i></sub>
+</div>
+<!--  -->
+<blockquote>
+<ul class="simple">
+<li>Where <span class="formula"><i>w</i><sub><i>i</i></sub></span>
+ is the weight of the i-th component of the portfolio</li>
+</ul>
+</blockquote>
+<p>Example:</p>
+<blockquote>
+<ul class="simple">
+<li>You have information that IBM is going up</li>
+<li>But the same day the market goes down</li>
+<li>IBM goes down as well, but is better than the market</li>
+</ul>
+<blockquote>
+<ul class="simple">
+<li>Difference = alpha</li>
+</ul>
+</blockquote>
+<ul class="simple">
+<li>How to profit from it:<ul>
+<li>Long IBM</li>
+<li>Short the market =&gt; short an index fund</li>
+<li>Given that<ul>
+<li><span class="formula"><i>β</i><sub><i>ibm</i></sub> = <i>β</i><sub><i>market</i></sub> = 1.0</span>
+</li>
+<li><span class="formula"><i>w</i><sub><i>ibm</i></sub> = <i>w</i><sub><i>market</i></sub> = 0.5</span>
+</li>
+</ul>
+</li>
+<li><span class="formula"><i>r</i><sub><i>ibm</i></sub> = <i>w</i><sub><i>ibm</i></sub>*<i>β</i><sub><i>ibm</i></sub> + <i>w</i><sub><i>ibm</i></sub> + <i>α</i><sub><i>ibm</i></sub></span>
+</li>
+<li><span class="formula"><i>r</i><sub><i>market</i></sub> = <i>w</i><sub><i>market</i></sub>*<i>β</i><sub><i>market</i></sub> + <i>w</i><sub><i>market</i></sub> + <i>α</i><sub><i>market</i></sub></span>
+</li>
+<li><span class="formula"><i>r</i><sub><i>ibm</i></sub> = 0.5*1 + 0.5*<i>α</i><sub><i>ibm</i></sub></span>
+</li>
+<li><span class="formula"><i>r</i><sub><i>market</i></sub> =  − 0.5*1 + 0.5*<i>α</i><sub><i>market</i></sub></span>
+ =&gt; we assume is 0</li>
+<li><span class="formula"><i>r</i><sub><i>total</i></sub> = 0.5*<i>α</i><sub><i>ibm</i></sub></span>
+</li>
+<li>We get <span class="formula"><i>r</i><sub><i>total</i></sub></span>
+ even when the market has gone down =&gt; we negated the market risk</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+
+  </div><!-- /.entry-content -->
+   <footer class="post-info text-muted">
+    Posted on <abbr class="published" title="2014-06-11T22:20:00">
+      Wed 11 June 2014
+    </abbr>
+    <address class="vcard author">
+      by <a class="url fn" href="http://javcasas.github.io/author/javier-casas.html">Javier Casas</a>
+    </address> in <a href="http://javcasas.github.io/category/computational-investing-i.html">Computational Investing I</a>
+    <br/>Tagged <a href="http://javcasas.github.io/tag/computational-investing.html">computational investing </a><a href="http://javcasas.github.io/tag/notes.html">notes </a>  </footer><!-- /.post-info -->
+</section>
+            <footer id="contentinfo" class="footer">
+                    <nav class="pull-right bottom-nav">
+                        <!--<a href="http://javcasas.github.io/None">RSS</a>-->
+                    </nav>
+                    <address id="about" class="vcard body">
+                    &copy; <a href="http://javcasas.github.io">The Technoprom Core</a> 2014. All rights reserved. Proudly powered by <a href="http://getpelican.com/">Pelican</a>
+                    </address><!-- /#about -->
+            </footer><!-- /#contentinfo -->
+        </div><!-- container -->
+    </body>
+</html>
