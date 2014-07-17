@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Python Decorators - The Technoprom Core</title>
+        <meta charset="utf-8" />
+        <!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />-->
+        <link href="http://javcasas.github.io/theme/style.css" rel="stylesheet" />
+        <link href="http://javcasas.github.io/theme/math.css" rel="stylesheet" />
+        <!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> -->
+    </head>
+
+    <body id="index" class="archive">
+        <div class="container">
+            <div class="header">
+                <ul class="nav nav-pills pull-right">
+                    <li class=""><a href="http://javcasas.github.io">Home</a></li>
+                    <li><a href="http://javcasas.github.io/archives.html">Archives</a></li>
+                </ul>
+                <h3 class="text-muted"><a href="http://javcasas.github.io">The Technoprom Core</a></h3>
+				<h2 class="text-muted">Advanced and not-so-advanced technology</h2>
+            </div>
+<section id="content" class="article content">
+  <header>
+    <h2 class="entry-title">
+      <a href="http://javcasas.github.io/posts/2014/Jul/17/python-decorators/" rel="bookmark"
+         title="Permalink to Python Decorators">Python Decorators</a></h2>
+ 
+  </header>
+  
+     
+  <div class="entry-content">
+    <p>One of the ways to do advanced programming in Python is using decorators.</p>
+<div class="section" id="what-are-the-decorators">
+<h2>What are the decorators?</h2>
+<p>Decorators are functions that transform functions into other functions. They are usually used as annotations on functions that modify the behaviour of the function in curious ways.
+Since decorators modify functions, and you can apply several of them, they are a way to apply some functional programming in Python</p>
+</div>
+<div class="section" id="basic-decorators">
+<h2>Basic decorators</h2>
+<p>Let's start with a simple decorator.
+This decorator will store the result of a function, and return it immediately if called repeately, instead of calculating it again and again:</p>
+<pre class="literal-block">
+def memoize(wrapped_fn):
+    def fn():
+        if not fn._result_available:
+            fn._result_available = True
+            fn._result = wrapped_fn()
+        return fn._result
+    fn._result_available = False
+    return fn
+
+
+&#64;memoize
+def fn():
+    print &quot;Getting data&quot;
+    return 5
+
+for i in range(10):
+    print fn()
+</pre>
+<p>Decorators can have parameters, to configure them in a way. For example, here is a decorator that retries a failing function several times.
+It can be used to fetch resources from the Internet, even when the connection is unreliable:</p>
+<pre class="literal-block">
+class retries(object):
+    def __init__(self, nretries=3):
+        self.nretries = nretries
+
+    def __call__(self, wrapped_fn):
+        def fn(*args, **kwargs):
+            for i in range(1, self.nretries):
+                try:
+                    return wrapped_fn(*args, **kwargs)
+                except Exception:
+                    print &quot;{} failed {} times, retrying...&quot;.format(wrapped_fn, i)
+            return wrapped_fn(*args, **kwargs)
+        return fn
+
+&#64;retries(nretries=5)
+def fn():
+    raise Exception(&quot;Spam&quot;)
+
+fn()
+</pre>
+<p>Decorators can be used for debugging and tracing what happens with your code. You can use them to enforce contracts, check parameters and return types.
+For example, here is a decorator that prints the returning value of a function:</p>
+<pre class="literal-block">
+def print_return(wrapped_fn):
+    def fn(*args, **kwargs):
+        res = wrapped_fn(*args, **kwargs)
+        print &quot;{} returned {}&quot;.format(wrapped_fn, res)
+        return res
+    return fn
+
+&#64;print_return
+def fn():
+    return 5
+
+fn()
+</pre>
+<p>You can apply several decorators to a function. For example, here are a couple of silly decorators that apply HTML formatting to a function:</p>
+<pre class="literal-block">
+class HTMLTag(object):
+    def __init__(self, tag):
+        self.tag = tag
+        self.open_tag = &quot;&lt;{}&gt;&quot;.format(self.tag)
+        self.close_tag = &quot;&lt;/{}&gt;&quot;.format(self.tag)
+
+    def __call__(self, wrapped_fn):
+        def fn(*args, **kwargs):
+            return self.open_tag + wrapped_fn(*args, **kwargs) + self.close_tag
+        return fn
+
+&#64;HTMLTag(&quot;h1&quot;)
+&#64;HTMLTag(&quot;i&quot;)
+def title():
+    return &quot;This is a title&quot;
+
+print title()
+</pre>
+<p>Decorators are a way to enhace functions with common traits, and a very interesting feature in Python. Although creating them is a bit tricky,
+a good decorator should be easily reused.</p>
+</div>
+<div class="section" id="what-s-next">
+<h2>What's next?</h2>
+<p>We should jump from simple examples, to really generic decorators, in order to increase the reusability of the code. In a future post we will have a look
+at some functional decorators.</p>
+</div>
+
+  </div><!-- /.entry-content -->
+   <footer class="post-info text-muted">
+    Posted on <abbr class="published" title="2014-07-17T21:01:00">
+      Thu 17 July 2014
+    </abbr>
+    <address class="vcard author">
+      by <a class="url fn" href="http://javcasas.github.io/author/javier-casas.html">Javier Casas</a>
+    </address> in <a href="http://javcasas.github.io/category/python.html">Python</a>
+    <br/>Tagged <a href="http://javcasas.github.io/tag/python.html">python </a><a href="http://javcasas.github.io/tag/decorators.html">decorators </a><a href="http://javcasas.github.io/tag/functional-programming.html">functional programming </a>  </footer><!-- /.post-info -->
+</section>
+            <footer id="contentinfo" class="footer">
+                    <nav class="pull-right bottom-nav">
+                        <!--<a href="http://javcasas.github.io/None">RSS</a>-->
+                    </nav>
+                    <address id="about" class="vcard body">
+                    &copy; <a href="http://javcasas.github.io">The Technoprom Core</a> 2014. All rights reserved. Proudly powered by <a href="http://getpelican.com/">Pelican</a>
+                    </address><!-- /#about -->
+            </footer><!-- /#contentinfo -->
+        </div><!-- container -->
+    </body>
+</html>

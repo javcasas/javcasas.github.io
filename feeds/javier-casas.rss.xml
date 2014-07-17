@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>The Technoprom Core</title><link>http://javcasas.github.io/</link><description>Advanced and not-so-advanced technology</description><atom:link href="http://javcasas.github.io/feeds/javier-casas.rss.xml" rel="self"></atom:link><lastBuildDate>Thu, 17 Jul 2014 21:01:00 +0200</lastBuildDate><item><title>Python Decorators</title><link>http://javcasas.github.io/posts/2014/Jul/17/python-decorators/</link><description>&lt;p&gt;One of the ways to do advanced programming in Python is using decorators.&lt;/p&gt;
+&lt;div class="section" id="what-are-the-decorators"&gt;
+&lt;h2&gt;What are the decorators?&lt;/h2&gt;
+&lt;p&gt;Decorators are functions that transform functions into other functions. They are usually used as annotations on functions that modify the behaviour of the function in curious ways.
+Since decorators modify functions, and you can apply several of them, they are a way to apply some functional programming in Python&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="basic-decorators"&gt;
+&lt;h2&gt;Basic decorators&lt;/h2&gt;
+&lt;p&gt;Let's start with a simple decorator.
+This decorator will store the result of a function, and return it immediately if called repeately, instead of calculating it again and again:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+def memoize(wrapped_fn):
+    def fn():
+        if not fn._result_available:
+            fn._result_available = True
+            fn._result = wrapped_fn()
+        return fn._result
+    fn._result_available = False
+    return fn
+
+
+&amp;#64;memoize
+def fn():
+    print &amp;quot;Getting data&amp;quot;
+    return 5
+
+for i in range(10):
+    print fn()
+&lt;/pre&gt;
+&lt;p&gt;Decorators can have parameters, to configure them in a way. For example, here is a decorator that retries a failing function several times.
+It can be used to fetch resources from the Internet, even when the connection is unreliable:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+class retries(object):
+    def __init__(self, nretries=3):
+        self.nretries = nretries
+
+    def __call__(self, wrapped_fn):
+        def fn(*args, **kwargs):
+            for i in range(1, self.nretries):
+                try:
+                    return wrapped_fn(*args, **kwargs)
+                except Exception:
+                    print &amp;quot;{} failed {} times, retrying...&amp;quot;.format(wrapped_fn, i)
+            return wrapped_fn(*args, **kwargs)
+        return fn
+
+&amp;#64;retries(nretries=5)
+def fn():
+    raise Exception(&amp;quot;Spam&amp;quot;)
+
+fn()
+&lt;/pre&gt;
+&lt;p&gt;Decorators can be used for debugging and tracing what happens with your code. You can use them to enforce contracts, check parameters and return types.
+For example, here is a decorator that prints the returning value of a function:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+def print_return(wrapped_fn):
+    def fn(*args, **kwargs):
+        res = wrapped_fn(*args, **kwargs)
+        print &amp;quot;{} returned {}&amp;quot;.format(wrapped_fn, res)
+        return res
+    return fn
+
+&amp;#64;print_return
+def fn():
+    return 5
+
+fn()
+&lt;/pre&gt;
+&lt;p&gt;You can apply several decorators to a function. For example, here are a couple of silly decorators that apply HTML formatting to a function:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+class HTMLTag(object):
+    def __init__(self, tag):
+        self.tag = tag
+        self.open_tag = &amp;quot;&amp;lt;{}&amp;gt;&amp;quot;.format(self.tag)
+        self.close_tag = &amp;quot;&amp;lt;/{}&amp;gt;&amp;quot;.format(self.tag)
+
+    def __call__(self, wrapped_fn):
+        def fn(*args, **kwargs):
+            return self.open_tag + wrapped_fn(*args, **kwargs) + self.close_tag
+        return fn
+
+&amp;#64;HTMLTag(&amp;quot;h1&amp;quot;)
+&amp;#64;HTMLTag(&amp;quot;i&amp;quot;)
+def title():
+    return &amp;quot;This is a title&amp;quot;
+
+print title()
+&lt;/pre&gt;
+&lt;p&gt;Decorators are a way to enhace functions with common traits, and a very interesting feature in Python. Although creating them is a bit tricky,
+a good decorator should be easily reused.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="what-s-next"&gt;
+&lt;h2&gt;What's next?&lt;/h2&gt;
+&lt;p&gt;We should jump from simple examples, to really generic decorators, in order to increase the reusability of the code. In a future post we will have a look
+at some functional decorators.&lt;/p&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Javier Casas</dc:creator><pubDate>Thu, 17 Jul 2014 21:01:00 +0200</pubDate><guid>tag:javcasas.github.io,2014-07-17:posts/2014/Jul/17/python-decorators/</guid><category>python</category><category>decorators</category><category>functional programming</category></item><item><title>The Technoprom Core</title><link>http://javcasas.github.io/posts/2014/Jul/09/technoprom-core/</link><description>&lt;p&gt;Welcome to my webpage. Here you will find my comments, ramblings and other stuff.&lt;/p&gt;
+&lt;p&gt;The webpage is built using &lt;a class="reference external" href="http://blog.getpelican.com/"&gt;Pelican&lt;/a&gt;, and uses a custom style compiled to CSS using &lt;a class="reference external" href="http://lesscss.org"&gt;LESS&lt;/a&gt; and a general design based on readability.
+Unlike many other websites, you shouldn't require javascript or advanced plugins to view the main content.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Javier Casas</dc:creator><pubDate>Wed, 09 Jul 2014 22:20:00 +0200</pubDate><guid>tag:javcasas.github.io,2014-07-09:posts/2014/Jul/09/technoprom-core/</guid><category>about</category></item><item><title>About Me</title><link>http://javcasas.github.io/posts/2014/Jun/20/javier-casas-bio/</link><description>&lt;p&gt;I am Javier Casas. I am a Software Engineer, technologist, and jack of all technological trades. I enjoy writing software, electronics, learning and building. Building as in creating.&lt;/p&gt;
+&lt;p&gt;I was born in Spain, started playing with electronics with some old Radiorama magazines, and continued my passion later with computing, and software developing.
+My first programming environment was QBasic, on the MS-DOS shell embedded in Windows 95.
+From there, I jumped to C and DIV. Later, while doing my degree I finally got hold of an Internet connection, and started playing with more advanced languages.
+I learned a bit about C++, Java, Pascal, assembly for x86 and UltraSPARC, as well as a bit of Eiffel.
+Finally, for my University project I wrote an OpenGL object model and game engine in OCaML, with bits of Python to interface with Blender.
+Since then I have worked in embedded systems, using initially Vala to (indirectly) compile to ARM, and then Python to write Web UIs and backend code for big embedded (appliance-like) systems.&lt;/p&gt;
+&lt;p&gt;I currently work for ApplianSys, in Coventry (UK), where we develop nice appliances for web caching and managing DNS using Python and our deeply-modified flavour of Linux.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Javier Casas</dc:creator><pubDate>Fri, 20 Jun 2014 22:20:00 +0200</pubDate><guid>tag:javcasas.github.io,2014-06-20:posts/2014/Jun/20/javier-casas-bio/</guid><category>about</category></item><item><title>Computational Investing I Notes: Intrinsic Value</title><link>http://javcasas.github.io/posts/2014/Jun/11/041_intrinsic_value/</link><description>&lt;div class="section" id="intrinsic-value"&gt;
+&lt;h2&gt;041 Intrinsic Value&lt;/h2&gt;
+&lt;p&gt;Is a way to value an asset. Values the asset as the sum of expected returns (dividends) from it in the future.&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;i&gt;Discount&lt;/i&gt;_&lt;i&gt;rate&lt;/i&gt; = &lt;span class="fraction"&gt;&lt;span class="ignored"&gt;(&lt;/span&gt;&lt;span class="numerator"&gt;&lt;i&gt;value&lt;/i&gt;_&lt;i&gt;of&lt;/i&gt;_&lt;i&gt;the&lt;/i&gt;_&lt;i&gt;asset&lt;/i&gt;_&lt;i&gt;now&lt;/i&gt;&lt;/span&gt;&lt;span class="ignored"&gt;)/(&lt;/span&gt;&lt;span class="denominator"&gt;&lt;i&gt;value&lt;/i&gt;_&lt;i&gt;of&lt;/i&gt;_&lt;i&gt;the&lt;/i&gt;_&lt;i&gt;asset&lt;/i&gt;_&lt;i&gt;after&lt;/i&gt;_&lt;i&gt;a&lt;/i&gt;_&lt;i&gt;year&lt;/i&gt;&lt;/span&gt;&lt;span class="ignored"&gt;)&lt;/span&gt;&lt;/span&gt; = &lt;i&gt;γ&lt;/i&gt;
+&lt;/div&gt;
+&lt;!--  --&gt;
+&lt;p&gt;Example: bank interest rate = 1%, discount rate for a bank account = 0.99&lt;/p&gt;
+&lt;p&gt;The current value of a dollar in the asset is the sum of all the produced dividends in the future, adjusted (using gamma) to the current value of a dollar.&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;i&gt;Current&lt;/i&gt;_&lt;i&gt;value&lt;/i&gt;_&lt;i&gt;of&lt;/i&gt;_&lt;i&gt;a&lt;/i&gt;_&lt;i&gt;dollar&lt;/i&gt; = &lt;span class="limits"&gt;&lt;sup class="limit"&gt;∞&lt;/sup&gt;&lt;span class="limit"&gt;&lt;span class="symbol"&gt;∑&lt;/span&gt;&lt;/span&gt;&lt;sub class="limit"&gt;&lt;i&gt;i&lt;/i&gt; = 1&lt;/sub&gt;&lt;/span&gt;(&lt;i&gt;γ&lt;/i&gt;)&lt;sup&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sup&gt;
+&lt;/div&gt;
+&lt;!--  --&gt;
+&lt;p&gt;The value of the asset is the ammount of expected dividends adjusted to the current value.&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;i&gt;Current&lt;/i&gt;_&lt;i&gt;value&lt;/i&gt;_&lt;i&gt;of&lt;/i&gt;_&lt;i&gt;the&lt;/i&gt;_&lt;i&gt;asset&lt;/i&gt; = &lt;span class="limits"&gt;&lt;sup class="limit"&gt;∞&lt;/sup&gt;&lt;span class="limit"&gt;&lt;span class="symbol"&gt;∑&lt;/span&gt;&lt;/span&gt;&lt;sub class="limit"&gt;&lt;i&gt;i&lt;/i&gt; = 1&lt;/sub&gt;&lt;/span&gt;(&lt;i&gt;dividend&lt;/i&gt;⋅&lt;i&gt;γ&lt;/i&gt;)&lt;sup&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sup&gt; = &lt;i&gt;dividend&lt;/i&gt;⋅&lt;span class="fraction"&gt;&lt;span class="ignored"&gt;(&lt;/span&gt;&lt;span class="numerator"&gt;1&lt;/span&gt;&lt;span class="ignored"&gt;)/(&lt;/span&gt;&lt;span class="denominator"&gt;1 − &lt;i&gt;γ&lt;/i&gt;&lt;/span&gt;&lt;span class="ignored"&gt;)&lt;/span&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;!--  --&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Javier Casas</dc:creator><pubDate>Wed, 11 Jun 2014 22:20:00 +0200</pubDate><guid>tag:javcasas.github.io,2014-06-11:posts/2014/Jun/11/041_intrinsic_value/</guid><category>computational investing</category><category>notes</category></item><item><title>Computational Investing I Notes: News</title><link>http://javcasas.github.io/posts/2014/Jun/11/042_news/</link><description>&lt;div class="section" id="news"&gt;
+&lt;h2&gt;042 News&lt;/h2&gt;
+&lt;p&gt;News affect prices, because they give information about the future returns of an asset, therefore showing an updated view of the real price of the asset.&lt;/p&gt;
+&lt;p&gt;Good news tend to cause price increase.
+Bad news tend to cause price decrease.&lt;/p&gt;
+&lt;p&gt;News and events may affect a single company, a region, or the whole world. But companies depend on each others, and their prices are linked.&lt;/p&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Javier Casas</dc:creator><pubDate>Wed, 11 Jun 2014 22:20:00 +0200</pubDate><guid>tag:javcasas.github.io,2014-06-11:posts/2014/Jun/11/042_news/</guid><category>computational investing</category><category>notes</category></item><item><title>Computational Investing I Notes: Fundamental Analysis</title><link>http://javcasas.github.io/posts/2014/Jun/11/043_fundamental_analysis/</link><description>&lt;div class="section" id="fundamental-analysis"&gt;
+&lt;h2&gt;043 Fundamental Analysis&lt;/h2&gt;
+&lt;p&gt;Is a way to calculate the value of a company.&lt;/p&gt;
+&lt;p&gt;The value is the sum of:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Book value: the total value of the company's assets if the company were liquidated now.&lt;ul&gt;
+&lt;li&gt;Total assets - intangible assets (patents, goodwill) and liabilities&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Future returns: Intrinsic value&lt;ul&gt;
+&lt;li&gt;Future income generated by the asset, discounting it to the present value:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="formula"&gt;
+&lt;i&gt;Intrinsic&lt;/i&gt;_&lt;i&gt;value&lt;/i&gt; = &lt;span class="limits"&gt;&lt;sup class="limit"&gt;∞&lt;/sup&gt;&lt;span class="limit"&gt;&lt;span class="symbol"&gt;∑&lt;/span&gt;&lt;/span&gt;&lt;sub class="limit"&gt;&lt;i&gt;i&lt;/i&gt; = 1&lt;/sub&gt;&lt;/span&gt;(&lt;i&gt;dividend&lt;/i&gt;⋅&lt;i&gt;γ&lt;/i&gt;)&lt;sup&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sup&gt;
+&lt;/div&gt;
+&lt;!--  --&gt;
+&lt;p&gt;What's a company worth?&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;value = number of shares outstanding * price per share = market cap&lt;/li&gt;
+&lt;li&gt;Market price&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Javier Casas</dc:creator><pubDate>Wed, 11 Jun 2014 22:20:00 +0200</pubDate><guid>tag:javcasas.github.io,2014-06-11:posts/2014/Jun/11/043_fundamental_analysis/</guid><category>computational investing</category><category>notes</category></item><item><title>Computational Investing I Notes: Capital Assets Pricing Model - CAPM</title><link>http://javcasas.github.io/posts/2014/Jun/11/071_capm/</link><description>&lt;div class="section" id="capital-assets-pricing-model-capm"&gt;
+&lt;h2&gt;071 Capital Assets Pricing Model - CAPM&lt;/h2&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Recommended read: Grinold &amp;amp; Kahn Chapter 2&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Assumptions:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Return on stock is a mix of:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Systematic return:&lt;ul&gt;
+&lt;li&gt;The whole market moves in a direction, and carries the stocks with it&lt;/li&gt;
+&lt;li&gt;Return of the market: &lt;span class="formula"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt;&lt;/sub&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;Susceptibility of a stock to be 'carried away' by the market (market correlation): &lt;span class="formula"&gt;&lt;i&gt;β&lt;/i&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Residual return:&lt;ul&gt;
+&lt;li&gt;The stock moves somewhat randomly from the market&lt;/li&gt;
+&lt;li&gt;Difference from the market in a given day: &lt;span class="formula"&gt;&lt;i&gt;α&lt;/i&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;Expected value of the residual is 0: &lt;span class="formula"&gt;&lt;i&gt;E&lt;/i&gt;(&lt;i&gt;α&lt;/i&gt;) = 0&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;div class="formula"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt; = &lt;i&gt;β&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;*&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt;&lt;/sub&gt; + &lt;i&gt;α&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;
+&lt;/div&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Market return = risk free rate of return + excess return&lt;ul&gt;
+&lt;li&gt;Risk free rate of return is usually bank interest rate&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;dl class="docutils"&gt;
+&lt;dt&gt;A market portfolio is a market-cap weighted index&lt;/dt&gt;
+&lt;dd&gt;&lt;ul class="first last simple"&gt;
+&lt;li&gt;US S&amp;amp;P500&lt;/li&gt;
+&lt;li&gt;UK FTA&lt;/li&gt;
+&lt;li&gt;Japan TOPIX&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Javier Casas</dc:creator><pubDate>Wed, 11 Jun 2014 22:20:00 +0200</pubDate><guid>tag:javcasas.github.io,2014-06-11:posts/2014/Jun/11/071_capm/</guid><category>computational investing</category><category>notes</category></item><item><title>Computational Investing I Notes: CAPM: What is beta?</title><link>http://javcasas.github.io/posts/2014/Jun/11/072_capm_beta/</link><description>&lt;div class="section" id="capm-what-is-beta"&gt;
+&lt;h2&gt;072 CAPM: What is beta?&lt;/h2&gt;
+&lt;div class="formula"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt; = &lt;i&gt;β&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;*&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;market&lt;/i&gt;&lt;/sub&gt; + &lt;i&gt;α&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;
+&lt;/div&gt;
+&lt;!--  --&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;span class="formula"&gt;&lt;i&gt;α&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;&lt;/span&gt; is information unique to the stock&lt;ul&gt;
+&lt;li&gt;Maybe it's exploitable&lt;/li&gt;
+&lt;li&gt;&lt;span class="formula"&gt;&lt;i&gt;E&lt;/i&gt;(&lt;i&gt;α&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;) = 0&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Assume:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="formula"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;(&lt;i&gt;t&lt;/i&gt;) = &lt;i&gt;β&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;*&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt;&lt;/sub&gt;(&lt;i&gt;t&lt;/i&gt;) + &lt;i&gt;α&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;
+&lt;/div&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Use linear regression to find &lt;span class="formula"&gt;&lt;i&gt;β&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;&lt;/span&gt; and &lt;span class="formula"&gt;&lt;i&gt;α&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Beta &amp;amp; correlation are different&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Two assets may be correlated but have different correlation&lt;/li&gt;
+&lt;li&gt;Correlation goes from -1 to 1&lt;/li&gt;
+&lt;li&gt;Correlation measures the width of the point cloud&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;CAPM:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;span class="formula"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;(&lt;i&gt;t&lt;/i&gt;) = &lt;i&gt;β&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;*&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt;&lt;/sub&gt;(&lt;i&gt;t&lt;/i&gt;) + &lt;i&gt;α&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class="formula"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;(&lt;i&gt;t&lt;/i&gt;) = &lt;i&gt;β&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;*&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt;&lt;/sub&gt;(&lt;i&gt;t&lt;/i&gt;) + &lt;i&gt;random&lt;/i&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class="formula"&gt;&lt;i&gt;E&lt;/i&gt;(&lt;i&gt;α&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;) = 0&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Active Portfolio Management View:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;span class="formula"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;(&lt;i&gt;t&lt;/i&gt;) = &lt;i&gt;β&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;*&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;m&lt;/i&gt;&lt;/sub&gt;(&lt;i&gt;t&lt;/i&gt;) + &lt;i&gt;α&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class="formula"&gt;&lt;i&gt;α&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;&lt;/span&gt; is somewhat predictable, therefore exploitable&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Javier Casas</dc:creator><pubDate>Wed, 11 Jun 2014 22:20:00 +0200</pubDate><guid>tag:javcasas.github.io,2014-06-11:posts/2014/Jun/11/072_capm_beta/</guid><category>computational investing</category><category>notes</category></item><item><title>Computational Investing I Notes: How hedge funds use CAPM</title><link>http://javcasas.github.io/posts/2014/Jun/11/073_capm_hedge_funds/</link><description>&lt;div class="section" id="how-hedge-funds-use-capm"&gt;
+&lt;h2&gt;073 How hedge funds use CAPM&lt;/h2&gt;
+&lt;p&gt;The expected excess returns are proportional to &lt;span class="formula"&gt;&lt;i&gt;β&lt;/i&gt;&lt;/span&gt;, &lt;span class="formula"&gt;&lt;i&gt;β&lt;/i&gt; &amp;gt; 1&lt;/span&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Greater &lt;span class="formula"&gt;&lt;i&gt;β&lt;/i&gt;&lt;/span&gt; = greater risk&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The &lt;span class="formula"&gt;&lt;i&gt;β&lt;/i&gt;&lt;/span&gt; of a portfolio = weighted sum of &lt;span class="formula"&gt;&lt;i&gt;β&lt;/i&gt;&lt;/span&gt; of components:&lt;/p&gt;
+&lt;div class="formula"&gt;
+&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;portfolio&lt;/i&gt;&lt;/sub&gt; = &lt;span class="limits"&gt;&lt;span class="limit"&gt;&lt;span class="symbol"&gt;∑&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;i&gt;w&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;*&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;
+&lt;/div&gt;
+&lt;div class="formula"&gt;
+&lt;i&gt;β&lt;/i&gt;&lt;sub&gt;&lt;i&gt;portfolio&lt;/i&gt;&lt;/sub&gt; = &lt;span class="limits"&gt;&lt;span class="limit"&gt;&lt;span class="symbol"&gt;∑&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;i&gt;w&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;*&lt;i&gt;β&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;
+&lt;/div&gt;
+&lt;!--  --&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Where &lt;span class="formula"&gt;&lt;i&gt;w&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;&lt;/span&gt; is the weight of the i-th component of the portfolio&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;You have information that IBM is going up&lt;/li&gt;
+&lt;li&gt;But the same day the market goes down&lt;/li&gt;
+&lt;li&gt;IBM goes down as well, but is better than the market&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Difference = alpha&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;How to profit from it:&lt;ul&gt;
+&lt;li&gt;Long IBM&lt;/li&gt;
+&lt;li&gt;Short the market =&amp;gt; short an index fund&lt;/li&gt;
+&lt;li&gt;Given that&lt;ul&gt;
+&lt;li&gt;&lt;span class="formula"&gt;&lt;i&gt;β&lt;/i&gt;&lt;sub&gt;&lt;i&gt;ibm&lt;/i&gt;&lt;/sub&gt; = &lt;i&gt;β&lt;/i&gt;&lt;sub&gt;&lt;i&gt;market&lt;/i&gt;&lt;/sub&gt; = 1.0&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class="formula"&gt;&lt;i&gt;w&lt;/i&gt;&lt;sub&gt;&lt;i&gt;ibm&lt;/i&gt;&lt;/sub&gt; = &lt;i&gt;w&lt;/i&gt;&lt;sub&gt;&lt;i&gt;market&lt;/i&gt;&lt;/sub&gt; = 0.5&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;span class="formula"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;ibm&lt;/i&gt;&lt;/sub&gt; = &lt;i&gt;w&lt;/i&gt;&lt;sub&gt;&lt;i&gt;ibm&lt;/i&gt;&lt;/sub&gt;*&lt;i&gt;β&lt;/i&gt;&lt;sub&gt;&lt;i&gt;ibm&lt;/i&gt;&lt;/sub&gt; + &lt;i&gt;w&lt;/i&gt;&lt;sub&gt;&lt;i&gt;ibm&lt;/i&gt;&lt;/sub&gt; + &lt;i&gt;α&lt;/i&gt;&lt;sub&gt;&lt;i&gt;ibm&lt;/i&gt;&lt;/sub&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class="formula"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;market&lt;/i&gt;&lt;/sub&gt; = &lt;i&gt;w&lt;/i&gt;&lt;sub&gt;&lt;i&gt;market&lt;/i&gt;&lt;/sub&gt;*&lt;i&gt;β&lt;/i&gt;&lt;sub&gt;&lt;i&gt;market&lt;/i&gt;&lt;/sub&gt; + &lt;i&gt;w&lt;/i&gt;&lt;sub&gt;&lt;i&gt;market&lt;/i&gt;&lt;/sub&gt; + &lt;i&gt;α&lt;/i&gt;&lt;sub&gt;&lt;i&gt;market&lt;/i&gt;&lt;/sub&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class="formula"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;ibm&lt;/i&gt;&lt;/sub&gt; = 0.5*1 + 0.5*&lt;i&gt;α&lt;/i&gt;&lt;sub&gt;&lt;i&gt;ibm&lt;/i&gt;&lt;/sub&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class="formula"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;market&lt;/i&gt;&lt;/sub&gt; =  − 0.5*1 + 0.5*&lt;i&gt;α&lt;/i&gt;&lt;sub&gt;&lt;i&gt;market&lt;/i&gt;&lt;/sub&gt;&lt;/span&gt; =&amp;gt; we assume is 0&lt;/li&gt;
+&lt;li&gt;&lt;span class="formula"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;total&lt;/i&gt;&lt;/sub&gt; = 0.5*&lt;i&gt;α&lt;/i&gt;&lt;sub&gt;&lt;i&gt;ibm&lt;/i&gt;&lt;/sub&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;We get &lt;span class="formula"&gt;&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;total&lt;/i&gt;&lt;/sub&gt;&lt;/span&gt; even when the market has gone down =&amp;gt; we negated the market risk&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Javier Casas</dc:creator><pubDate>Wed, 11 Jun 2014 22:20:00 +0200</pubDate><guid>tag:javcasas.github.io,2014-06-11:posts/2014/Jun/11/073_capm_hedge_funds/</guid><category>computational investing</category><category>notes</category></item><item><title>Computational Investing I Notes: Efficient Market Hypotesis</title><link>http://javcasas.github.io/posts/2014/Jun/11/091_efficient_market_hypotesis/</link><description>&lt;div class="section" id="efficient-market-hypotesis"&gt;
+&lt;h2&gt;091 Efficient Market Hypotesis&lt;/h2&gt;
+&lt;p&gt;Basics of trading:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;if price is significantly less than value, buy&lt;/li&gt;
+&lt;li&gt;if price is significantly more than value, short&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;dl class="docutils"&gt;
+&lt;dt&gt;Price movement is relative to market&lt;/dt&gt;
+&lt;dd&gt;&lt;dl class="first last docutils"&gt;
+&lt;dt&gt;Technical analysis:&lt;/dt&gt;
+&lt;dd&gt;&lt;ul class="first last simple"&gt;
+&lt;li&gt;Price &amp;amp; volume only&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/dd&gt;
+&lt;dt&gt;Fundamental analysis&lt;/dt&gt;
+&lt;dd&gt;&lt;ul class="first last simple"&gt;
+&lt;li&gt;Financial statements&lt;/li&gt;
+&lt;li&gt;P/E ratio, cash on hand, dividends&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;p&gt;The info for the analysis comes from:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Price/Volume: the markets&lt;/li&gt;
+&lt;li&gt;Fundamentals: SEC filings&lt;/li&gt;
+&lt;li&gt;News: Exogenous sources&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="efficient-markets-hypotesis"&gt;
+&lt;h2&gt;092 Efficient Markets Hypotesis&lt;/h2&gt;
+&lt;p&gt;The variations of the prices reflect what the market thinks is the correct price
+There are 3 versions of the Efficient Markets Hypotesis:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Weak: prices reflect all past publicly available information&lt;ul&gt;
+&lt;li&gt;Prohibits profit from Technical Analysis&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Semi-strong: weak + prices instantly change to reflect new public information&lt;ul&gt;
+&lt;li&gt;Prohibits profit from Technical Analysis and Fundamental Analysis&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Strong: Semi-strong + prices instantly reflect even hidden or 'insider' information&lt;ul&gt;
+&lt;li&gt;Prohibits profit from Technical Analysis, Fundamental Analysis and even from insider information&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;But the hypoteses doesn't seem to be true:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;The fundamental information doesn't correlate&lt;/li&gt;
+&lt;li&gt;Behavioural Economics -&amp;gt; cognitive biases:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;The traders are humans, not perfectly calculating machines. They suffer from:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Overconfidence&lt;/li&gt;
+&lt;li&gt;Overreaction&lt;/li&gt;
+&lt;li&gt;Information bias&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class="section" id="event-studies-in-detail"&gt;
+&lt;h2&gt;093 Event Studies in Detail&lt;/h2&gt;
+&lt;p&gt;Events affect the price.&lt;/p&gt;
+&lt;p&gt;Price reflects the event before it happens =&amp;gt; news leakage&lt;/p&gt;
+&lt;p&gt;Negative news:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;1st day: sharp negative reaction&lt;/li&gt;
+&lt;li&gt;2nd day: negative reaction&lt;/li&gt;
+&lt;li&gt;3rd-nth day: recovery&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Positive news:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;1st day: sharp positive reaction&lt;/li&gt;
+&lt;li&gt;2nd day: weak positive reaction&lt;/li&gt;
+&lt;li&gt;From 2nd day: flat out&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Events effects can be measured&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;With confidence intervals&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Javier Casas</dc:creator><pubDate>Wed, 11 Jun 2014 22:20:00 +0200</pubDate><guid>tag:javcasas.github.io,2014-06-11:posts/2014/Jun/11/091_efficient_market_hypotesis/</guid><category>computational investing</category><category>notes</category></item><item><title>Computational Investing I Notes: Event Studies</title><link>http://javcasas.github.io/posts/2014/Jun/11/094_event_studies/</link><description>&lt;div class="section" id="event-studies"&gt;
+&lt;h2&gt;094 Event Studies&lt;/h2&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;We need many many events to get some decent charts&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;QSTK has an event profile&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;QSTK Tutorial 9&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Create event matrix. Columns: date, equity 1, equity 2...&lt;/p&gt;
+&lt;p&gt;Each row shall be filled as 1 if event, nan if not event&lt;/p&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Javier Casas</dc:creator><pubDate>Wed, 11 Jun 2014 22:20:00 +0200</pubDate><guid>tag:javcasas.github.io,2014-06-11:posts/2014/Jun/11/094_event_studies/</guid><category>computational investing</category><category>notes</category></item><item><title>Computational Investing I Notes: QSTK Intro</title><link>http://javcasas.github.io/posts/2014/Jun/11/171_qstk_intro/</link><description>&lt;div class="section" id="qstk-intro"&gt;
+&lt;h2&gt;171 QSTK Intro&lt;/h2&gt;
+&lt;pre class="literal-block"&gt;
+import QSTK.qstkutil.qsdateutil as du
+import QSTK.qstkutil.tsutil as tsu
+import QSTK.qstkutil.DataAccess as da
+
+dates = du.getNYSEdays(datetime_start, datetime_end, timedelta_timeofday)
+
+dataobject = da.DataAccess('Yahoo')
+
+symbols = ['AAPL', 'GLD', 'GOOG', '$SPX', 'XOM']
+keys = ['open', 'high', 'low', 'close', 'volume', 'actual_close']
+
+data = dataobject.get_data(dates, symbols, keys)
+
+data = dict(zip(keys, data))
+
+prices = data['close'].values
+
+normalized_prices = prices / prices[0,:]
+&lt;/pre&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Javier Casas</dc:creator><pubDate>Wed, 11 Jun 2014 22:20:00 +0200</pubDate><guid>tag:javcasas.github.io,2014-06-11:posts/2014/Jun/11/171_qstk_intro/</guid><category>computational investing</category><category>notes</category></item><item><title>K Means Clustering Algorithm</title><link>http://javcasas.github.io/posts/2014/Mar/11/k_means/</link><description>&lt;div class="section" id="introduction"&gt;
+&lt;h2&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;K Means is an algorithm of the family of unsupervised learning algorithms. It separates a cloud of points into several groups.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="algorithm"&gt;
+&lt;h2&gt;Algorithm&lt;/h2&gt;
+&lt;p&gt;K Means divides the space in regions the same way a Voronoi diagram does. The algorithm is really simple:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+Initialise the K means to random points in the sample
+Repeat until convergence:
+    For each point in the data set:
+        Assign the point to its nearest K mean
+    For each K mean:
+        Move the K mean to the average location of its assigned points
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="example-code"&gt;
+&lt;h2&gt;Example code&lt;/h2&gt;
+&lt;p&gt;The following Python program implements K Means clustering in a 2D environment. It uses PyGame for visualisation. First it creates several random clouds of points and then it triers to fit several K means to them. Note that not every cloud of points can easily get a K-means clasification, and not every K-means clasification is actually useful.&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="/downloads/k_means.py"&gt;k_means.py&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Javier Casas</dc:creator><pubDate>Tue, 11 Mar 2014 22:20:00 +0100</pubDate><guid>tag:javcasas.github.io,2014-03-11:posts/2014/Mar/11/k_means/</guid><category>machine learning</category><category>ml</category><category>unsupervised learning</category></item></channel></rss>
