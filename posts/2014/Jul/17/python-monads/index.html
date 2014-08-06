@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Monads in Python - The Technoprom Core</title>
+        <meta charset="utf-8" />
+        <!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />-->
+        <link href="http://javcasas.github.io/theme/style.css" rel="stylesheet" />
+        <link href="http://javcasas.github.io/theme/math.css" rel="stylesheet" />
+        <!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> -->
+    </head>
+
+    <body id="index" class="archive">
+        <div class="container">
+            <div class="header">
+                <ul class="nav nav-pills pull-right">
+                    <li class=""><a href="http://javcasas.github.io">Home</a></li>
+                    <li><a href="http://javcasas.github.io/archives.html">Archives</a></li>
+                </ul>
+                <h3 class="text-muted"><a href="http://javcasas.github.io">The Technoprom Core</a></h3>
+				<h2 class="text-muted">Advanced and not-so-advanced technology</h2>
+            </div>
+<section id="content" class="article content">
+  <header>
+    <h2 class="entry-title">
+      <a href="http://javcasas.github.io/posts/2014/Jul/17/python-monads/" rel="bookmark"
+         title="Permalink to Monads in Python">Monads in Python</a></h2>
+ 
+  </header>
+  
+     
+  <div class="entry-content">
+    <p>On my quest to improve my code and learn more of the craft, I started learning Haskell. I knew a bit of OCaML, but
+I didn't have the experience to actually do proper functional programming.
+Haskell forces you to do it, because it's purely functional, and doesn't support standard OO abstractions,
+which at the end of the day were the way I &quot;cheated&quot; to make a 3D engine in OCaML without applying too much functional programming.</p>
+<p>But there was something I remembered from OCaML, which I missed in all the other languages: a proper algebraic type system. OCaML's option type is the reason why NullPointerException will never take off in functional languages. In Haskell, that is called the Maybe data type. But Haskell wasn't willing to stop there. Once you have a computation that may succeed or not, returning Just x, or Nothing, you don't stop there. You continue by chaining computations. If all of them succeed, you get a Just with the result, and if any of them fails, you get Nothing.</p>
+<p>But chaining stuff the &quot;standard&quot; way is ugly. You have to check after each computation if you got Just or Nothing, and act accordingly. If only we could factor out the check...</p>
+<div class="section" id="monads-to-the-rescue">
+<h2>Monads to the rescue</h2>
+<p>The monad is a general way of chaining computations. Depending on the situation, the chaining will work in different
+ways. For example, the Maybe monad chains computations in a way that if all of them are successful, you get Just with a result, but if any of them fails you get Nothing. The monad factors out the check after each computation, and you only have to check the final value.</p>
+<p>Maybe is the simplest and most popular monad. That's why is the prime example for demonstrating monads. Its usefulness extends far away, not only in Haskell. Here we reimplement the Maybe monad in Python, because in Python it is also useful to have several computations that can be chained.</p>
+<p>But first we need to define failed computations.</p>
+</div>
+<div class="section" id="failed-computations">
+<h2>Failed computations</h2>
+<p>We will organise our computations in functions. We define a failed computation in Python as a computation that fails in a predictable way: raising an exception.
+So either the computation is successful, and the function returns a useful value, or the computation fails, and it raises an exception.</p>
+</div>
+<div class="section" id="maybe-monad">
+<h2>Maybe monad</h2>
+<p>Now we have enough to define the maybe monad. I'll use a class to put everything in a contained namespace:</p>
+<pre class="literal-block">
+class Maybe(object):
+    &quot;&quot;&quot;
+    Maybe monad in Python
+    Any error in the wrapped function will make the function return None
+    &quot;&quot;&quot;
+    &#64;classmethod
+    def lift(cls, wrapped_fn):
+        &quot;&quot;&quot;
+        Decorator
+        Converts a function to use the Maybe monad
+        &#64;param wrapped_fn: a function that accepts a single parameter
+        &quot;&quot;&quot;
+        def fn((status, arg)):
+            if status == &quot;failed&quot;:  # short circuit
+                return (&quot;failed&quot;, None)
+            else:
+                try:
+                    result = wrapped_fn(arg)
+                    return &quot;success&quot;, result
+                except Exception:
+                    return &quot;failed&quot;, None
+        return fn
+
+    &#64;classmethod
+    def ret(arg):
+        &quot;&quot;&quot;
+        return function for the Maybe monad
+        &#64;param arg: the argument to wrap
+        &quot;&quot;&quot;
+        return ('success', arg)
+
+    &#64;classmethod
+    def extract((status, arg)):
+        &quot;&quot;&quot;
+        Extracts the value boxed in a Maybe monad
+        &#64;param: the value
+        &#64;return: the unboxed value,
+                 or raises Exception(&quot;Unsuccessful computation&quot;)
+        &quot;&quot;&quot;
+        if status == 'success':
+            return arg
+        else:
+            raise Exception(&quot;Unsuccessful computation&quot;)
+
+
+op1 = Maybe.lift(fun1)
+op2 = Maybe.lift(fun1)
+op3 = Maybe.lift(fun1)
+result = Maybe.extract(op1(op2(op3(Maybe.ret(value)))))
+</pre>
+</div>
+<div class="section" id="but-why">
+<h2>But why?</h2>
+<p>Sure, we have made the Maybe monad in python. But it is worth it? Well, not for this case. The Maybe monad
+is way easily integrated in Python as a try-except block:</p>
+<pre class="literal-block">
+try:
+    val1 = fun1(value)
+    val2 = fun2(val1)
+    val3 = fun3(val2)
+    return val3
+except Exception:
+    print &quot;Something went wrong&quot;
+</pre>
+<dl class="docutils">
+<dt>So here is the conclusion:</dt>
+<dd><ul class="first last simple">
+<li>Python is awesome</li>
+<li>Haskell is awesome</li>
+<li>Haskell in Python may not be awesome</li>
+</ul>
+</dd>
+</dl>
+</div>
+
+  </div><!-- /.entry-content -->
+   <footer class="post-info text-muted">
+    Posted on <abbr class="published" title="2014-07-17T21:01:00">
+      Thu 17 July 2014
+    </abbr>
+    <address class="vcard author">
+      by <a class="url fn" href="http://javcasas.github.io/author/javier-casas.html">Javier Casas</a>
+    </address> in <a href="http://javcasas.github.io/category/python.html">Python</a>
+    <br/>Tagged <a href="http://javcasas.github.io/tag/python.html">python </a><a href="http://javcasas.github.io/tag/decorators.html">decorators </a><a href="http://javcasas.github.io/tag/functional-programming.html">functional programming </a><a href="http://javcasas.github.io/tag/monad.html">monad </a>  </footer><!-- /.post-info -->
+</section>
+            <footer id="contentinfo" class="footer">
+                    <nav class="pull-right bottom-nav">
+                        <!--<a href="http://javcasas.github.io/None">RSS</a>-->
+                    </nav>
+                    <address id="about" class="vcard body">
+                    &copy; <a href="http://javcasas.github.io">The Technoprom Core</a> 2014. All rights reserved. Proudly powered by <a href="http://getpelican.com/">Pelican</a>
+                    </address><!-- /#about -->
+            </footer><!-- /#contentinfo -->
+        </div><!-- container -->
+    </body>
+</html>

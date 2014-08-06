@@ -95,7 +95,103 @@ a good decorator should be easily reused.&lt;/p&gt;
 &lt;p&gt;We should jump from simple examples, to really generic decorators, in order to increase the reusability of the code. In a future post we will have a look
 at some functional decorators.&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="python"></category><category term="decorators"></category><category term="functional programming"></category></entry><entry><title>The Technoprom Core</title><link href="http://javcasas.github.io/posts/2014/Jul/09/technoprom-core/" rel="alternate"></link><updated>2014-07-09T22:20:00+02:00</updated><author><name>Javier Casas</name></author><id>tag:javcasas.github.io,2014-07-09:posts/2014/Jul/09/technoprom-core/</id><summary type="html">&lt;p&gt;Welcome to my webpage. Here you will find my comments, ramblings and other stuff.&lt;/p&gt;
+</summary><category term="python"></category><category term="decorators"></category><category term="functional programming"></category></entry><entry><title>Monads in Python</title><link href="http://javcasas.github.io/posts/2014/Jul/17/python-monads/" rel="alternate"></link><updated>2014-07-17T21:01:00+02:00</updated><author><name>Javier Casas</name></author><id>tag:javcasas.github.io,2014-07-17:posts/2014/Jul/17/python-monads/</id><summary type="html">&lt;p&gt;On my quest to improve my code and learn more of the craft, I started learning Haskell. I knew a bit of OCaML, but
+I didn't have the experience to actually do proper functional programming.
+Haskell forces you to do it, because it's purely functional, and doesn't support standard OO abstractions,
+which at the end of the day were the way I &amp;quot;cheated&amp;quot; to make a 3D engine in OCaML without applying too much functional programming.&lt;/p&gt;
+&lt;p&gt;But there was something I remembered from OCaML, which I missed in all the other languages: a proper algebraic type system. OCaML's option type is the reason why NullPointerException will never take off in functional languages. In Haskell, that is called the Maybe data type. But Haskell wasn't willing to stop there. Once you have a computation that may succeed or not, returning Just x, or Nothing, you don't stop there. You continue by chaining computations. If all of them succeed, you get a Just with the result, and if any of them fails, you get Nothing.&lt;/p&gt;
+&lt;p&gt;But chaining stuff the &amp;quot;standard&amp;quot; way is ugly. You have to check after each computation if you got Just or Nothing, and act accordingly. If only we could factor out the check...&lt;/p&gt;
+&lt;div class="section" id="monads-to-the-rescue"&gt;
+&lt;h2&gt;Monads to the rescue&lt;/h2&gt;
+&lt;p&gt;The monad is a general way of chaining computations. Depending on the situation, the chaining will work in different
+ways. For example, the Maybe monad chains computations in a way that if all of them are successful, you get Just with a result, but if any of them fails you get Nothing. The monad factors out the check after each computation, and you only have to check the final value.&lt;/p&gt;
+&lt;p&gt;Maybe is the simplest and most popular monad. That's why is the prime example for demonstrating monads. Its usefulness extends far away, not only in Haskell. Here we reimplement the Maybe monad in Python, because in Python it is also useful to have several computations that can be chained.&lt;/p&gt;
+&lt;p&gt;But first we need to define failed computations.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="failed-computations"&gt;
+&lt;h2&gt;Failed computations&lt;/h2&gt;
+&lt;p&gt;We will organise our computations in functions. We define a failed computation in Python as a computation that fails in a predictable way: raising an exception.
+So either the computation is successful, and the function returns a useful value, or the computation fails, and it raises an exception.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="maybe-monad"&gt;
+&lt;h2&gt;Maybe monad&lt;/h2&gt;
+&lt;p&gt;Now we have enough to define the maybe monad. I'll use a class to put everything in a contained namespace:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+class Maybe(object):
+    &amp;quot;&amp;quot;&amp;quot;
+    Maybe monad in Python
+    Any error in the wrapped function will make the function return None
+    &amp;quot;&amp;quot;&amp;quot;
+    &amp;#64;classmethod
+    def lift(cls, wrapped_fn):
+        &amp;quot;&amp;quot;&amp;quot;
+        Decorator
+        Converts a function to use the Maybe monad
+        &amp;#64;param wrapped_fn: a function that accepts a single parameter
+        &amp;quot;&amp;quot;&amp;quot;
+        def fn((status, arg)):
+            if status == &amp;quot;failed&amp;quot;:  # short circuit
+                return (&amp;quot;failed&amp;quot;, None)
+            else:
+                try:
+                    result = wrapped_fn(arg)
+                    return &amp;quot;success&amp;quot;, result
+                except Exception:
+                    return &amp;quot;failed&amp;quot;, None
+        return fn
+
+    &amp;#64;classmethod
+    def ret(arg):
+        &amp;quot;&amp;quot;&amp;quot;
+        return function for the Maybe monad
+        &amp;#64;param arg: the argument to wrap
+        &amp;quot;&amp;quot;&amp;quot;
+        return ('success', arg)
+
+    &amp;#64;classmethod
+    def extract((status, arg)):
+        &amp;quot;&amp;quot;&amp;quot;
+        Extracts the value boxed in a Maybe monad
+        &amp;#64;param: the value
+        &amp;#64;return: the unboxed value,
+                 or raises Exception(&amp;quot;Unsuccessful computation&amp;quot;)
+        &amp;quot;&amp;quot;&amp;quot;
+        if status == 'success':
+            return arg
+        else:
+            raise Exception(&amp;quot;Unsuccessful computation&amp;quot;)
+
+
+op1 = Maybe.lift(fun1)
+op2 = Maybe.lift(fun1)
+op3 = Maybe.lift(fun1)
+result = Maybe.extract(op1(op2(op3(Maybe.ret(value)))))
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="but-why"&gt;
+&lt;h2&gt;But why?&lt;/h2&gt;
+&lt;p&gt;Sure, we have made the Maybe monad in python. But it is worth it? Well, not for this case. The Maybe monad
+is way easily integrated in Python as a try-except block:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+try:
+    val1 = fun1(value)
+    val2 = fun2(val1)
+    val3 = fun3(val2)
+    return val3
+except Exception:
+    print &amp;quot;Something went wrong&amp;quot;
+&lt;/pre&gt;
+&lt;dl class="docutils"&gt;
+&lt;dt&gt;So here is the conclusion:&lt;/dt&gt;
+&lt;dd&gt;&lt;ul class="first last simple"&gt;
+&lt;li&gt;Python is awesome&lt;/li&gt;
+&lt;li&gt;Haskell is awesome&lt;/li&gt;
+&lt;li&gt;Haskell in Python may not be awesome&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/div&gt;
+</summary><category term="python"></category><category term="decorators"></category><category term="functional programming"></category><category term="monad"></category></entry><entry><title>The Technoprom Core</title><link href="http://javcasas.github.io/posts/2014/Jul/09/technoprom-core/" rel="alternate"></link><updated>2014-07-09T22:20:00+02:00</updated><author><name>Javier Casas</name></author><id>tag:javcasas.github.io,2014-07-09:posts/2014/Jul/09/technoprom-core/</id><summary type="html">&lt;p&gt;Welcome to my webpage. Here you will find my comments, ramblings and other stuff.&lt;/p&gt;
 &lt;p&gt;The webpage is built using &lt;a class="reference external" href="http://blog.getpelican.com/"&gt;Pelican&lt;/a&gt;, and uses a custom style compiled to CSS using &lt;a class="reference external" href="http://lesscss.org"&gt;LESS&lt;/a&gt; and a general design based on readability.
 Unlike many other websites, you shouldn't require javascript or advanced plugins to view the main content.&lt;/p&gt;
 </summary><category term="about"></category></entry><entry><title>About Me</title><link href="http://javcasas.github.io/posts/2014/Jun/20/javier-casas-bio/" rel="alternate"></link><updated>2014-06-20T22:20:00+02:00</updated><author><name>Javier Casas</name></author><id>tag:javcasas.github.io,2014-06-20:posts/2014/Jun/20/javier-casas-bio/</id><summary type="html">&lt;p&gt;I am Javier Casas. I am a Software Engineer, technologist, and jack of all technological trades. I enjoy writing software, electronics, learning and building. Building as in creating.&lt;/p&gt;
