@@ -1,5 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>The Technoprom Core</title><link>http://javcasas.github.io/</link><description>Advanced and not-so-advanced technology</description><atom:link href="http://javcasas.github.io/feeds/javier-casas.rss.xml" rel="self"></atom:link><lastBuildDate>Thu, 17 Jul 2014 21:01:00 +0200</lastBuildDate><item><title>Python Decorators</title><link>http://javcasas.github.io/posts/2014/Jul/17/python-decorators/</link><description>&lt;p&gt;One of the ways to do advanced programming in Python is using decorators.&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>The Technoprom Core</title><link>http://javcasas.github.io/</link><description>Advanced and not-so-advanced technology</description><atom:link href="http://javcasas.github.io/feeds/javier-casas.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 27 Jan 2015 19:10:00 +0100</lastBuildDate><item><title>Learning How to Learn</title><link>http://javcasas.github.io/posts/2015/Jan/27/how_to_learn/</link><description>&lt;div class="section" id="the-art-of-improving-oneself"&gt;
+&lt;h2&gt;The Art of Improving Oneself&lt;/h2&gt;
+&lt;div class="section" id="introduction"&gt;
+&lt;h3&gt;Introduction&lt;/h3&gt;
+&lt;p&gt;We are born, and before we know what's going on, we are thrown into a school,
+to update our knowledge of the world. At least us, the lucky ones, are thrown
+into a school. Remember not everyone is as lucky as you, and may have to work
+hard before he has the chance to learn to read and write.&lt;/p&gt;
+&lt;p&gt;My point is: learning converts weak children into (mostly) decent and competent
+adults. Learning and improving is what differentiates the human from the
+animal.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="the-zen-of-improving-yourself"&gt;
+&lt;h3&gt;The zen of improving yourself&lt;/h3&gt;
+&lt;p&gt;Kung-fu masters spend decades practicing, punching and kicking, and that's how
+they become masters. But I'm a bad and impatient young grasshopper. I'm not
+willing to wait 50 years to become a master. I want to believe there is a way
+to accelerate it, to accelerate the acquisition of knowledge, skills and
+wisdom. And I think I have a point: some masters are incredibly young. So there
+must be some difference between the way the young master learns, and the way
+the old master learns. Otherwise young masters would not exist.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="motivation"&gt;
+&lt;h3&gt;Motivation&lt;/h3&gt;
+&lt;p&gt;Me, me, me. It's always me. I want to improve. I want to be better. I want to
+be great, and awesome, and powerfull, and all that stuff. And I happen to be
+a software developer, which puts me in a high learning career. Either learn and
+improve, or become an obsolete old fart. So following from it, I want to
+improve my way of improving, so I can be all that awesome in less time.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="the-way-of-the-learner"&gt;
+&lt;h2&gt;The way of the learner&lt;/h2&gt;
+&lt;p&gt;So I used to learn the way I learn. Not really efective way. You know, you
+spend all these years at school learning Maths, and Geography, and History, and
+Language. But no teacher spends a friggin' minute teaching you how to learn. So
+you discover your own way, which mostly works for school, but it's probably
+sub-optimal, if not completely misleading.&lt;/p&gt;
+&lt;p&gt;Decades later, I read about the most popular MOOCs of 2014. And one of them was
+&amp;quot;Learning How to Learn&amp;quot;. And it was an eye-opener for me. On this document, you
+will find a reduced version of what's available on the MOOC, so you can have it
+as a quick list.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="focused-and-diffuse-modes-of-thinking"&gt;
+&lt;h2&gt;Focused and diffuse modes of thinking&lt;/h2&gt;
+&lt;p&gt;Your brain works in misterious ways, but the scientists have managed to
+separate them into two main ways:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;The diffuse mode: on this mode, your brain doesn't concentrate on anything
+special. You think about everything at the same time: the groceries list,
+today's bad traffic on the highway, the conversations you overheard at the
+office today... Just a bit of everything. On this mode, your thoughs jump
+around without focusing on anything. It's also the same mode you are on when
+you are going to sleep.&lt;/li&gt;
+&lt;li&gt;The focused mode: This is the mode you enter when you are concentrating in
+order to solve a problem. All you can see is the problem in front of you. The
+sexiest girl in the world could be dancing naked in front of you, and you
+wouldn't see her.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The problem is that the focused mode is what you use to learn and to fix hard
+problems. It's the sharp point of the though. But it's so concentrated, it
+can't see any other solutions. On the other hand, the diffuse mode can see lots
+of solutions, different approaches, and is the way to think &amp;quot;out of the box&amp;quot;.
+But it's pointless, and hardly could fix anything.&lt;/p&gt;
+&lt;p&gt;And your brain can only be at one mode. So you have to learn how to juggle the
+modes. How to go into focused, and diffused, on demand.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="key-learning-techniques"&gt;
+&lt;h2&gt;Key learning techniques&lt;/h2&gt;
+&lt;p&gt;You open a text book. It's full of words. Definitely, not all the words are
+important. Some of them are more important than others. And there is this
+thing, called the &amp;quot;main idea&amp;quot;, which is what you should remember. And that's
+probably the biggest point: remember the main idea.&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Remember: You are not learning if you are not remembering. Techniques such as
+highlighting fail often because the student concentrates into highlighting.
+What matters at the end is what you remember. So the first technique of the
+great learner, is to remember as much as possible of what has been studied.
+Study a bit, close the book, try to remember as much as possible. The very
+act of trying to remember helps push the knowledge into your long-term
+memory.&lt;/li&gt;
+&lt;li&gt;The main idea: Everything revolves around the main idea. You can't learn
+properly until you have found the main idea and distilled it to it's minium
+components.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Javier Casas</dc:creator><pubDate>Tue, 27 Jan 2015 19:10:00 +0100</pubDate><guid>tag:javcasas.github.io,2015-01-27:posts/2015/Jan/27/how_to_learn/</guid><category>learn</category><category>learning</category><category>mooc</category></item><item><title>Python Decorators</title><link>http://javcasas.github.io/posts/2014/Jul/17/python-decorators/</link><description>&lt;p&gt;One of the ways to do advanced programming in Python is using decorators.&lt;/p&gt;
 &lt;div class="section" id="what-are-the-decorators"&gt;
 &lt;h2&gt;What are the decorators?&lt;/h2&gt;
 &lt;p&gt;Decorators are functions that transform functions into other functions. They are usually used as annotations on functions that modify the behaviour of the function in curious ways.
@@ -187,6 +273,7 @@ except Exception:
 &lt;li&gt;Python is awesome&lt;/li&gt;
 &lt;li&gt;Haskell is awesome&lt;/li&gt;
 &lt;li&gt;Haskell in Python may not be awesome&lt;/li&gt;
+&lt;li&gt;Use the right tool for the right job&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/dd&gt;
 &lt;/dl&gt;
