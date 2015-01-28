@@ -81,8 +81,25 @@ Study a bit, close the book, try to remember as much as possible. The very
 act of trying to remember helps push the knowledge into your long-term
 memory.&lt;/li&gt;
 &lt;li&gt;The main idea: Everything revolves around the main idea. You can't learn
-properly until you have found the main idea and distilled it to it's minium
+properly until you have found the main idea and distilled it to it's minimum
 components.&lt;/li&gt;
+&lt;li&gt;Don't learn. Do. You will never become a master until you do whatever you want
+to learn. Read the text book, then apply what's written on the text book to
+actually fix something.&lt;/li&gt;
+&lt;li&gt;Learning takes time. In order to learn something, you have to repeat it several
+times, over a long period of time. If you learn something in a day, it will be
+forgotten in another day. The only way to make it stick is by repeating it over
+several days.&lt;/li&gt;
+&lt;li&gt;Relax. Not everything can fit in your head in a day. Even worse, when your head
+is stuck with the wrong answer, hammering it will only make it worse. Let your
+mind wander away for a while, and let go the broken answer in order to make space
+for the right one.&lt;/li&gt;
+&lt;li&gt;Interleave learning. Study several disciplines every day at different times. Your
+brain works and improves when you make it switch between different tasks.&lt;/li&gt;
+&lt;li&gt;Exercise is awesome. Your brain relaxes when you exercise, your blood flows better,
+the toxins go away, the belly fat dissolves, and you feel better. There is no bad side.&lt;/li&gt;
+&lt;li&gt;Sleep is very important. Your brain cleans up itself and reinforces ideas while
+sleeping. So sleeping too little in order to study more is actually a bad idea.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Javier Casas</dc:creator><pubDate>Tue, 27 Jan 2015 19:10:00 +0100</pubDate><guid>tag:javcasas.github.io,2015-01-27:posts/2015/Jan/27/how_to_learn/</guid><category>learn</category><category>learning</category><category>mooc</category></item><item><title>Python Decorators</title><link>http://javcasas.github.io/posts/2014/Jul/17/python-decorators/</link><description>&lt;p&gt;One of the ways to do advanced programming in Python is using decorators.&lt;/p&gt;
