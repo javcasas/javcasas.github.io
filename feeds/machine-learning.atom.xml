@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>The Tecnoprom Core</title><link href="http://javcasas.github.io/" rel="alternate"></link><link href="http://javcasas.github.io/feeds/machine-learning.atom.xml" rel="self"></link><id>http://javcasas.github.io/</id><updated>2014-03-11T22:20:00+01:00</updated><entry><title>K Means Clustering Algorithm</title><link href="http://javcasas.github.io/posts/2014/Mar/11/k_means/" rel="alternate"></link><updated>2014-03-11T22:20:00+01:00</updated><author><name>Javier Casas</name></author><id>tag:javcasas.github.io,2014-03-11:posts/2014/Mar/11/k_means/</id><summary type="html">&lt;div class="section" id="introduction"&gt;
+&lt;h2&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;K Means is an algorithm of the family of unsupervised learning algorithms. It separates a cloud of points into several groups.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="algorithm"&gt;
+&lt;h2&gt;Algorithm&lt;/h2&gt;
+&lt;p&gt;K Means divides the space in regions the same way a Voronoi diagram does. The algorithm is really simple:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+Initialise the K means to random points in the sample
+Repeat until convergence:
+    For each point in the data set:
+        Assign the point to its nearest K mean
+    For each K mean:
+        Move the K mean to the average location of its assigned points
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="example-code"&gt;
+&lt;h2&gt;Example code&lt;/h2&gt;
+&lt;p&gt;The following Python program implements K Means clustering in a 2D environment. It uses PyGame for visualisation. First it creates several random clouds of points and then it triers to fit several K means to them. Note that not every cloud of points can easily get a K-means clasification, and not every K-means clasification is actually useful.&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="/downloads/k_means.py"&gt;k_means.py&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="machine learning"></category><category term="ml"></category><category term="unsupervised learning"></category></entry></feed>

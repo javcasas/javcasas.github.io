@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>The Tecnoprom Core</title><link href="http://javcasas.github.io/" rel="alternate"></link><link href="http://javcasas.github.io/feeds/python.atom.xml" rel="self"></link><id>http://javcasas.github.io/</id><updated>2014-07-17T21:01:00+02:00</updated><entry><title>Python Decorators</title><link href="http://javcasas.github.io/posts/2014/Jul/17/python-decorators/" rel="alternate"></link><updated>2014-07-17T21:01:00+02:00</updated><author><name>Javier Casas</name></author><id>tag:javcasas.github.io,2014-07-17:posts/2014/Jul/17/python-decorators/</id><summary type="html">&lt;p&gt;One of the ways to do advanced programming in Python is using decorators.&lt;/p&gt;
+&lt;div class="section" id="what-are-the-decorators"&gt;
+&lt;h2&gt;What are the decorators?&lt;/h2&gt;
+&lt;p&gt;Decorators are functions that transform functions into other functions. They are usually used as annotations on functions that modify the behaviour of the function in curious ways.
+Since decorators modify functions, and you can apply several of them, they are a way to apply some functional programming in Python&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="basic-decorators"&gt;
+&lt;h2&gt;Basic decorators&lt;/h2&gt;
+&lt;p&gt;Let's start with a simple decorator.
+This decorator will store the result of a function, and return it immediately if called repeately, instead of calculating it again and again:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+def memoize(wrapped_fn):
+    def fn():
+        if not fn._result_available:
+            fn._result_available = True
+            fn._result = wrapped_fn()
+        return fn._result
+    fn._result_available = False
+    return fn
+
+
+&amp;#64;memoize
+def fn():
+    print &amp;quot;Getting data&amp;quot;
+    return 5
+
+for i in range(10):
+    print fn()
+&lt;/pre&gt;
+&lt;p&gt;Decorators can have parameters, to configure them in a way. For example, here is a decorator that retries a failing function several times.
+It can be used to fetch resources from the Internet, even when the connection is unreliable:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+class retries(object):
+    def __init__(self, nretries=3):
+        self.nretries = nretries
+
+    def __call__(self, wrapped_fn):
+        def fn(*args, **kwargs):
+            for i in range(1, self.nretries):
+                try:
+                    return wrapped_fn(*args, **kwargs)
+                except Exception:
+                    print &amp;quot;{} failed {} times, retrying...&amp;quot;.format(wrapped_fn, i)
+            return wrapped_fn(*args, **kwargs)
+        return fn
+
+&amp;#64;retries(nretries=5)
+def fn():
+    raise Exception(&amp;quot;Spam&amp;quot;)
+
+fn()
+&lt;/pre&gt;
+&lt;p&gt;Decorators can be used for debugging and tracing what happens with your code. You can use them to enforce contracts, check parameters and return types.
+For example, here is a decorator that prints the returning value of a function:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+def print_return(wrapped_fn):
+    def fn(*args, **kwargs):
+        res = wrapped_fn(*args, **kwargs)
+        print &amp;quot;{} returned {}&amp;quot;.format(wrapped_fn, res)
+        return res
+    return fn
+
+&amp;#64;print_return
+def fn():
+    return 5
+
+fn()
+&lt;/pre&gt;
+&lt;p&gt;You can apply several decorators to a function. For example, here are a couple of silly decorators that apply HTML formatting to a function:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+class HTMLTag(object):
+    def __init__(self, tag):
+        self.tag = tag
+        self.open_tag = &amp;quot;&amp;lt;{}&amp;gt;&amp;quot;.format(self.tag)
+        self.close_tag = &amp;quot;&amp;lt;/{}&amp;gt;&amp;quot;.format(self.tag)
+
+    def __call__(self, wrapped_fn):
+        def fn(*args, **kwargs):
+            return self.open_tag + wrapped_fn(*args, **kwargs) + self.close_tag
+        return fn
+
+&amp;#64;HTMLTag(&amp;quot;h1&amp;quot;)
+&amp;#64;HTMLTag(&amp;quot;i&amp;quot;)
+def title():
+    return &amp;quot;This is a title&amp;quot;
+
+print title()
+&lt;/pre&gt;
+&lt;p&gt;Decorators are a way to enhace functions with common traits, and a very interesting feature in Python. Although creating them is a bit tricky,
+a good decorator should be easily reused.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="what-s-next"&gt;
+&lt;h2&gt;What's next?&lt;/h2&gt;
+&lt;p&gt;We should jump from simple examples, to really generic decorators, in order to increase the reusability of the code. In a future post we will have a look
+at some functional decorators.&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="python"></category><category term="decorators"></category><category term="functional programming"></category></entry><entry><title>Monads in Python</title><link href="http://javcasas.github.io/posts/2014/Jul/17/python-monads/" rel="alternate"></link><updated>2014-07-17T21:01:00+02:00</updated><author><name>Javier Casas</name></author><id>tag:javcasas.github.io,2014-07-17:posts/2014/Jul/17/python-monads/</id><summary type="html">&lt;p&gt;On my quest to improve my code and learn more of the craft, I started learning Haskell. I knew a bit of OCaML, but
+I didn't have the experience to actually do proper functional programming.
+Haskell forces you to do it, because it's purely functional, and doesn't support standard OO abstractions,
+which at the end of the day were the way I &amp;quot;cheated&amp;quot; to make a 3D engine in OCaML without applying too much functional programming.&lt;/p&gt;
+&lt;p&gt;But there was something I remembered from OCaML, which I missed in all the other languages: a proper algebraic type system. OCaML's option type is the reason why NullPointerException will never take off in functional languages. In Haskell, that is called the Maybe data type. But Haskell wasn't willing to stop there. Once you have a computation that may succeed or not, returning Just x, or Nothing, you don't stop there. You continue by chaining computations. If all of them succeed, you get a Just with the result, and if any of them fails, you get Nothing.&lt;/p&gt;
+&lt;p&gt;But chaining stuff the &amp;quot;standard&amp;quot; way is ugly. You have to check after each computation if you got Just or Nothing, and act accordingly. If only we could factor out the check...&lt;/p&gt;
+&lt;div class="section" id="monads-to-the-rescue"&gt;
+&lt;h2&gt;Monads to the rescue&lt;/h2&gt;
+&lt;p&gt;The monad is a general way of chaining computations. Depending on the situation, the chaining will work in different
+ways. For example, the Maybe monad chains computations in a way that if all of them are successful, you get Just with a result, but if any of them fails you get Nothing. The monad factors out the check after each computation, and you only have to check the final value.&lt;/p&gt;
+&lt;p&gt;Maybe is the simplest and most popular monad. That's why is the prime example for demonstrating monads. Its usefulness extends far away, not only in Haskell. Here we reimplement the Maybe monad in Python, because in Python it is also useful to have several computations that can be chained.&lt;/p&gt;
+&lt;p&gt;But first we need to define failed computations.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="failed-computations"&gt;
+&lt;h2&gt;Failed computations&lt;/h2&gt;
+&lt;p&gt;We will organise our computations in functions. We define a failed computation in Python as a computation that fails in a predictable way: raising an exception.
+So either the computation is successful, and the function returns a useful value, or the computation fails, and it raises an exception.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="maybe-monad"&gt;
+&lt;h2&gt;Maybe monad&lt;/h2&gt;
+&lt;p&gt;Now we have enough to define the maybe monad. I'll use a class to put everything in a contained namespace:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+class Maybe(object):
+    &amp;quot;&amp;quot;&amp;quot;
+    Maybe monad in Python
+    Any error in the wrapped function will make the function return None
+    &amp;quot;&amp;quot;&amp;quot;
+    &amp;#64;classmethod
+    def lift(cls, wrapped_fn):
+        &amp;quot;&amp;quot;&amp;quot;
+        Decorator
+        Converts a function to use the Maybe monad
+        &amp;#64;param wrapped_fn: a function that accepts a single parameter
+        &amp;quot;&amp;quot;&amp;quot;
+        def fn((status, arg)):
+            if status == &amp;quot;failed&amp;quot;:  # short circuit
+                return (&amp;quot;failed&amp;quot;, None)
+            else:
+                try:
+                    result = wrapped_fn(arg)
+                    return &amp;quot;success&amp;quot;, result
+                except Exception:
+                    return &amp;quot;failed&amp;quot;, None
+        return fn
+
+    &amp;#64;classmethod
+    def ret(arg):
+        &amp;quot;&amp;quot;&amp;quot;
+        return function for the Maybe monad
+        &amp;#64;param arg: the argument to wrap
+        &amp;quot;&amp;quot;&amp;quot;
+        return ('success', arg)
+
+    &amp;#64;classmethod
+    def extract((status, arg)):
+        &amp;quot;&amp;quot;&amp;quot;
+        Extracts the value boxed in a Maybe monad
+        &amp;#64;param: the value
+        &amp;#64;return: the unboxed value,
+                 or raises Exception(&amp;quot;Unsuccessful computation&amp;quot;)
+        &amp;quot;&amp;quot;&amp;quot;
+        if status == 'success':
+            return arg
+        else:
+            raise Exception(&amp;quot;Unsuccessful computation&amp;quot;)
+
+
+op1 = Maybe.lift(fun1)
+op2 = Maybe.lift(fun1)
+op3 = Maybe.lift(fun1)
+result = Maybe.extract(op1(op2(op3(Maybe.ret(value)))))
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="but-why"&gt;
+&lt;h2&gt;But why?&lt;/h2&gt;
+&lt;p&gt;Sure, we have made the Maybe monad in python. But it is worth it? Well, not for this case. The Maybe monad
+is way easily integrated in Python as a try-except block:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+try:
+    val1 = fun1(value)
+    val2 = fun2(val1)
+    val3 = fun3(val2)
+    return val3
+except Exception:
+    print &amp;quot;Something went wrong&amp;quot;
+&lt;/pre&gt;
+&lt;dl class="docutils"&gt;
+&lt;dt&gt;So here is the conclusion:&lt;/dt&gt;
+&lt;dd&gt;&lt;ul class="first last simple"&gt;
+&lt;li&gt;Python is awesome&lt;/li&gt;
+&lt;li&gt;Haskell is awesome&lt;/li&gt;
+&lt;li&gt;Haskell in Python may not be awesome&lt;/li&gt;
+&lt;li&gt;Use the right tool for the right job&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/div&gt;
+</summary><category term="python"></category><category term="decorators"></category><category term="functional programming"></category><category term="monad"></category></entry></feed>

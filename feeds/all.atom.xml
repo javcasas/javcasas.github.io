@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>The Tecnoprom Core</title><link>http://javcasas.github.io/</link><description>Advanced and not-so-advanced technology</description><atom:link href="http://javcasas.github.io/feeds/javier-casas.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 27 Jan 2015 19:10:00 +0100</lastBuildDate><item><title>Learning How to Learn</title><link>http://javcasas.github.io/posts/2015/Jan/27/how_to_learn/</link><description>&lt;div class="section" id="the-art-of-improving-oneself"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>The Tecnoprom Core</title><link href="http://javcasas.github.io/" rel="alternate"></link><link href="http://javcasas.github.io/feeds/all.atom.xml" rel="self"></link><id>http://javcasas.github.io/</id><updated>2015-01-27T19:10:00+01:00</updated><entry><title>Learning How to Learn</title><link href="http://javcasas.github.io/posts/2015/Jan/27/how_to_learn/" rel="alternate"></link><updated>2015-01-27T19:10:00+01:00</updated><author><name>Javier Casas</name></author><id>tag:javcasas.github.io,2015-01-27:posts/2015/Jan/27/how_to_learn/</id><summary type="html">&lt;div class="section" id="the-art-of-improving-oneself"&gt;
 &lt;h2&gt;The Art of Improving Oneself&lt;/h2&gt;
 &lt;div class="section" id="introduction"&gt;
 &lt;h3&gt;Introduction&lt;/h3&gt;
@@ -112,7 +112,7 @@ and information professionals. Not a single day goes on where something new is d
 or a new technique is developed. So if you want to stay on top of everything, you certainly
 need to be really good at learning and improving. So keep learning!&lt;/p&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Javier Casas</dc:creator><pubDate>Tue, 27 Jan 2015 19:10:00 +0100</pubDate><guid>tag:javcasas.github.io,2015-01-27:posts/2015/Jan/27/how_to_learn/</guid><category>learn</category><category>learning</category><category>mooc</category></item><item><title>Python Decorators</title><link>http://javcasas.github.io/posts/2014/Jul/17/python-decorators/</link><description>&lt;p&gt;One of the ways to do advanced programming in Python is using decorators.&lt;/p&gt;
+</summary><category term="learn"></category><category term="learning"></category><category term="mooc"></category></entry><entry><title>Python Decorators</title><link href="http://javcasas.github.io/posts/2014/Jul/17/python-decorators/" rel="alternate"></link><updated>2014-07-17T21:01:00+02:00</updated><author><name>Javier Casas</name></author><id>tag:javcasas.github.io,2014-07-17:posts/2014/Jul/17/python-decorators/</id><summary type="html">&lt;p&gt;One of the ways to do advanced programming in Python is using decorators.&lt;/p&gt;
 &lt;div class="section" id="what-are-the-decorators"&gt;
 &lt;h2&gt;What are the decorators?&lt;/h2&gt;
 &lt;p&gt;Decorators are functions that transform functions into other functions. They are usually used as annotations on functions that modify the behaviour of the function in curious ways.
@@ -208,7 +208,7 @@ a good decorator should be easily reused.&lt;/p&gt;
 &lt;p&gt;We should jump from simple examples, to really generic decorators, in order to increase the reusability of the code. In a future post we will have a look
 at some functional decorators.&lt;/p&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Javier Casas</dc:creator><pubDate>Thu, 17 Jul 2014 21:01:00 +0200</pubDate><guid>tag:javcasas.github.io,2014-07-17:posts/2014/Jul/17/python-decorators/</guid><category>python</category><category>decorators</category><category>functional programming</category></item><item><title>Monads in Python</title><link>http://javcasas.github.io/posts/2014/Jul/17/python-monads/</link><description>&lt;p&gt;On my quest to improve my code and learn more of the craft, I started learning Haskell. I knew a bit of OCaML, but
+</summary><category term="python"></category><category term="decorators"></category><category term="functional programming"></category></entry><entry><title>Monads in Python</title><link href="http://javcasas.github.io/posts/2014/Jul/17/python-monads/" rel="alternate"></link><updated>2014-07-17T21:01:00+02:00</updated><author><name>Javier Casas</name></author><id>tag:javcasas.github.io,2014-07-17:posts/2014/Jul/17/python-monads/</id><summary type="html">&lt;p&gt;On my quest to improve my code and learn more of the craft, I started learning Haskell. I knew a bit of OCaML, but
 I didn't have the experience to actually do proper functional programming.
 Haskell forces you to do it, because it's purely functional, and doesn't support standard OO abstractions,
 which at the end of the day were the way I &amp;quot;cheated&amp;quot; to make a 3D engine in OCaML without applying too much functional programming.&lt;/p&gt;
@@ -305,10 +305,10 @@ except Exception:
 &lt;/dd&gt;
 &lt;/dl&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Javier Casas</dc:creator><pubDate>Thu, 17 Jul 2014 21:01:00 +0200</pubDate><guid>tag:javcasas.github.io,2014-07-17:posts/2014/Jul/17/python-monads/</guid><category>python</category><category>decorators</category><category>functional programming</category><category>monad</category></item><item><title>The Technoprom Core</title><link>http://javcasas.github.io/posts/2014/Jul/09/technoprom-core/</link><description>&lt;p&gt;Welcome to my webpage. Here you will find my comments, ramblings and other stuff.&lt;/p&gt;
+</summary><category term="python"></category><category term="decorators"></category><category term="functional programming"></category><category term="monad"></category></entry><entry><title>The Technoprom Core</title><link href="http://javcasas.github.io/posts/2014/Jul/09/technoprom-core/" rel="alternate"></link><updated>2014-07-09T22:20:00+02:00</updated><author><name>Javier Casas</name></author><id>tag:javcasas.github.io,2014-07-09:posts/2014/Jul/09/technoprom-core/</id><summary type="html">&lt;p&gt;Welcome to my webpage. Here you will find my comments, ramblings and other stuff.&lt;/p&gt;
 &lt;p&gt;The webpage is built using &lt;a class="reference external" href="http://blog.getpelican.com/"&gt;Pelican&lt;/a&gt;, and uses a custom style compiled to CSS using &lt;a class="reference external" href="http://lesscss.org"&gt;LESS&lt;/a&gt; and a general design based on readability.
 Unlike many other websites, you shouldn't require javascript or advanced plugins to view the main content.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Javier Casas</dc:creator><pubDate>Wed, 09 Jul 2014 22:20:00 +0200</pubDate><guid>tag:javcasas.github.io,2014-07-09:posts/2014/Jul/09/technoprom-core/</guid><category>about</category></item><item><title>About Me</title><link>http://javcasas.github.io/posts/2014/Jun/20/javier-casas-bio/</link><description>&lt;p&gt;I am Javier Casas. I am a Software Engineer, technologist, and jack of all technological trades. I enjoy writing software, electronics, learning and building. Building as in creating.&lt;/p&gt;
+</summary><category term="about"></category></entry><entry><title>About Me</title><link href="http://javcasas.github.io/posts/2014/Jun/20/javier-casas-bio/" rel="alternate"></link><updated>2014-06-20T22:20:00+02:00</updated><author><name>Javier Casas</name></author><id>tag:javcasas.github.io,2014-06-20:posts/2014/Jun/20/javier-casas-bio/</id><summary type="html">&lt;p&gt;I am Javier Casas. I am a Software Engineer, technologist, and jack of all technological trades. I enjoy writing software, electronics, learning and building. Building as in creating.&lt;/p&gt;
 &lt;p&gt;I was born in Spain, started playing with electronics with some old Radiorama magazines, and continued my passion later with computing, and software developing.
 My first programming environment was QBasic, on the MS-DOS shell embedded in Windows 95.
 From there, I jumped to C and DIV. Later, while doing my degree I finally got hold of an Internet connection, and started playing with more advanced languages.
@@ -316,7 +316,7 @@ I learned a bit about C++, Java, Pascal, assembly for x86 and UltraSPARC, as wel
 Finally, for my University project I wrote an OpenGL object model and game engine in OCaML, with bits of Python to interface with Blender.
 Since then I have worked in embedded systems, using initially Vala to (indirectly) compile to ARM, and then Python to write Web UIs and backend code for big embedded (appliance-like) systems.&lt;/p&gt;
 &lt;p&gt;I currently work for ApplianSys, in Coventry (UK), where we develop nice appliances for web caching and managing DNS using Python and our deeply-modified flavour of Linux.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Javier Casas</dc:creator><pubDate>Fri, 20 Jun 2014 22:20:00 +0200</pubDate><guid>tag:javcasas.github.io,2014-06-20:posts/2014/Jun/20/javier-casas-bio/</guid><category>about</category></item><item><title>Computational Investing I Notes: Intrinsic Value</title><link>http://javcasas.github.io/posts/2014/Jun/11/041_intrinsic_value/</link><description>&lt;div class="section" id="intrinsic-value"&gt;
+</summary><category term="about"></category></entry><entry><title>Computational Investing I Notes: Intrinsic Value</title><link href="http://javcasas.github.io/posts/2014/Jun/11/041_intrinsic_value/" rel="alternate"></link><updated>2014-06-11T22:20:00+02:00</updated><author><name>Javier Casas</name></author><id>tag:javcasas.github.io,2014-06-11:posts/2014/Jun/11/041_intrinsic_value/</id><summary type="html">&lt;div class="section" id="intrinsic-value"&gt;
 &lt;h2&gt;041 Intrinsic Value&lt;/h2&gt;
 &lt;p&gt;Is a way to value an asset. Values the asset as the sum of expected returns (dividends) from it in the future.&lt;/p&gt;
 &lt;div class="formula"&gt;
@@ -335,14 +335,14 @@ Since then I have worked in embedded systems, using initially Vala to (indirectl
 &lt;/div&gt;
 &lt;!--  --&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Javier Casas</dc:creator><pubDate>Wed, 11 Jun 2014 22:20:00 +0200</pubDate><guid>tag:javcasas.github.io,2014-06-11:posts/2014/Jun/11/041_intrinsic_value/</guid><category>computational investing</category><category>notes</category></item><item><title>Computational Investing I Notes: News</title><link>http://javcasas.github.io/posts/2014/Jun/11/042_news/</link><description>&lt;div class="section" id="news"&gt;
+</summary><category term="computational investing"></category><category term="notes"></category></entry><entry><title>Computational Investing I Notes: News</title><link href="http://javcasas.github.io/posts/2014/Jun/11/042_news/" rel="alternate"></link><updated>2014-06-11T22:20:00+02:00</updated><author><name>Javier Casas</name></author><id>tag:javcasas.github.io,2014-06-11:posts/2014/Jun/11/042_news/</id><summary type="html">&lt;div class="section" id="news"&gt;
 &lt;h2&gt;042 News&lt;/h2&gt;
 &lt;p&gt;News affect prices, because they give information about the future returns of an asset, therefore showing an updated view of the real price of the asset.&lt;/p&gt;
 &lt;p&gt;Good news tend to cause price increase.
 Bad news tend to cause price decrease.&lt;/p&gt;
 &lt;p&gt;News and events may affect a single company, a region, or the whole world. But companies depend on each others, and their prices are linked.&lt;/p&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Javier Casas</dc:creator><pubDate>Wed, 11 Jun 2014 22:20:00 +0200</pubDate><guid>tag:javcasas.github.io,2014-06-11:posts/2014/Jun/11/042_news/</guid><category>computational investing</category><category>notes</category></item><item><title>Computational Investing I Notes: Fundamental Analysis</title><link>http://javcasas.github.io/posts/2014/Jun/11/043_fundamental_analysis/</link><description>&lt;div class="section" id="fundamental-analysis"&gt;
+</summary><category term="computational investing"></category><category term="notes"></category></entry><entry><title>Computational Investing I Notes: Fundamental Analysis</title><link href="http://javcasas.github.io/posts/2014/Jun/11/043_fundamental_analysis/" rel="alternate"></link><updated>2014-06-11T22:20:00+02:00</updated><author><name>Javier Casas</name></author><id>tag:javcasas.github.io,2014-06-11:posts/2014/Jun/11/043_fundamental_analysis/</id><summary type="html">&lt;div class="section" id="fundamental-analysis"&gt;
 &lt;h2&gt;043 Fundamental Analysis&lt;/h2&gt;
 &lt;p&gt;Is a way to calculate the value of a company.&lt;/p&gt;
 &lt;p&gt;The value is the sum of:&lt;/p&gt;
@@ -366,7 +366,7 @@ Bad news tend to cause price decrease.&lt;/p&gt;
 &lt;li&gt;Market price&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Javier Casas</dc:creator><pubDate>Wed, 11 Jun 2014 22:20:00 +0200</pubDate><guid>tag:javcasas.github.io,2014-06-11:posts/2014/Jun/11/043_fundamental_analysis/</guid><category>computational investing</category><category>notes</category></item><item><title>Computational Investing I Notes: Capital Assets Pricing Model - CAPM</title><link>http://javcasas.github.io/posts/2014/Jun/11/071_capm/</link><description>&lt;div class="section" id="capital-assets-pricing-model-capm"&gt;
+</summary><category term="computational investing"></category><category term="notes"></category></entry><entry><title>Computational Investing I Notes: Capital Assets Pricing Model - CAPM</title><link href="http://javcasas.github.io/posts/2014/Jun/11/071_capm/" rel="alternate"></link><updated>2014-06-11T22:20:00+02:00</updated><author><name>Javier Casas</name></author><id>tag:javcasas.github.io,2014-06-11:posts/2014/Jun/11/071_capm/</id><summary type="html">&lt;div class="section" id="capital-assets-pricing-model-capm"&gt;
 &lt;h2&gt;071 Capital Assets Pricing Model - CAPM&lt;/h2&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;Recommended read: Grinold &amp;amp; Kahn Chapter 2&lt;/li&gt;
@@ -419,7 +419,7 @@ Bad news tend to cause price decrease.&lt;/p&gt;
 &lt;/dd&gt;
 &lt;/dl&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Javier Casas</dc:creator><pubDate>Wed, 11 Jun 2014 22:20:00 +0200</pubDate><guid>tag:javcasas.github.io,2014-06-11:posts/2014/Jun/11/071_capm/</guid><category>computational investing</category><category>notes</category></item><item><title>Computational Investing I Notes: CAPM: What is beta?</title><link>http://javcasas.github.io/posts/2014/Jun/11/072_capm_beta/</link><description>&lt;div class="section" id="capm-what-is-beta"&gt;
+</summary><category term="computational investing"></category><category term="notes"></category></entry><entry><title>Computational Investing I Notes: CAPM: What is beta?</title><link href="http://javcasas.github.io/posts/2014/Jun/11/072_capm_beta/" rel="alternate"></link><updated>2014-06-11T22:20:00+02:00</updated><author><name>Javier Casas</name></author><id>tag:javcasas.github.io,2014-06-11:posts/2014/Jun/11/072_capm_beta/</id><summary type="html">&lt;div class="section" id="capm-what-is-beta"&gt;
 &lt;h2&gt;072 CAPM: What is beta?&lt;/h2&gt;
 &lt;div class="formula"&gt;
 &lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt; = &lt;i&gt;β&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;*&lt;i&gt;r&lt;/i&gt;&lt;sub&gt;&lt;i&gt;market&lt;/i&gt;&lt;/sub&gt; + &lt;i&gt;α&lt;/i&gt;&lt;sub&gt;&lt;i&gt;i&lt;/i&gt;&lt;/sub&gt;
@@ -472,7 +472,7 @@ Bad news tend to cause price decrease.&lt;/p&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Javier Casas</dc:creator><pubDate>Wed, 11 Jun 2014 22:20:00 +0200</pubDate><guid>tag:javcasas.github.io,2014-06-11:posts/2014/Jun/11/072_capm_beta/</guid><category>computational investing</category><category>notes</category></item><item><title>Computational Investing I Notes: How hedge funds use CAPM</title><link>http://javcasas.github.io/posts/2014/Jun/11/073_capm_hedge_funds/</link><description>&lt;div class="section" id="how-hedge-funds-use-capm"&gt;
+</summary><category term="computational investing"></category><category term="notes"></category></entry><entry><title>Computational Investing I Notes: How hedge funds use CAPM</title><link href="http://javcasas.github.io/posts/2014/Jun/11/073_capm_hedge_funds/" rel="alternate"></link><updated>2014-06-11T22:20:00+02:00</updated><author><name>Javier Casas</name></author><id>tag:javcasas.github.io,2014-06-11:posts/2014/Jun/11/073_capm_hedge_funds/</id><summary type="html">&lt;div class="section" id="how-hedge-funds-use-capm"&gt;
 &lt;h2&gt;073 How hedge funds use CAPM&lt;/h2&gt;
 &lt;p&gt;The expected excess returns are proportional to &lt;span class="formula"&gt;&lt;i&gt;β&lt;/i&gt;&lt;/span&gt;, &lt;span class="formula"&gt;&lt;i&gt;β&lt;/i&gt; &amp;gt; 1&lt;/span&gt;&lt;/p&gt;
 &lt;blockquote&gt;
@@ -525,7 +525,7 @@ Bad news tend to cause price decrease.&lt;/p&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Javier Casas</dc:creator><pubDate>Wed, 11 Jun 2014 22:20:00 +0200</pubDate><guid>tag:javcasas.github.io,2014-06-11:posts/2014/Jun/11/073_capm_hedge_funds/</guid><category>computational investing</category><category>notes</category></item><item><title>Computational Investing I Notes: Efficient Market Hypotesis</title><link>http://javcasas.github.io/posts/2014/Jun/11/091_efficient_market_hypotesis/</link><description>&lt;div class="section" id="efficient-market-hypotesis"&gt;
+</summary><category term="computational investing"></category><category term="notes"></category></entry><entry><title>Computational Investing I Notes: Efficient Market Hypotesis</title><link href="http://javcasas.github.io/posts/2014/Jun/11/091_efficient_market_hypotesis/" rel="alternate"></link><updated>2014-06-11T22:20:00+02:00</updated><author><name>Javier Casas</name></author><id>tag:javcasas.github.io,2014-06-11:posts/2014/Jun/11/091_efficient_market_hypotesis/</id><summary type="html">&lt;div class="section" id="efficient-market-hypotesis"&gt;
 &lt;h2&gt;091 Efficient Market Hypotesis&lt;/h2&gt;
 &lt;p&gt;Basics of trading:&lt;/p&gt;
 &lt;blockquote&gt;
@@ -625,7 +625,7 @@ There are 3 versions of the Efficient Markets Hypotesis:&lt;/p&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Javier Casas</dc:creator><pubDate>Wed, 11 Jun 2014 22:20:00 +0200</pubDate><guid>tag:javcasas.github.io,2014-06-11:posts/2014/Jun/11/091_efficient_market_hypotesis/</guid><category>computational investing</category><category>notes</category></item><item><title>Computational Investing I Notes: Event Studies</title><link>http://javcasas.github.io/posts/2014/Jun/11/094_event_studies/</link><description>&lt;div class="section" id="event-studies"&gt;
+</summary><category term="computational investing"></category><category term="notes"></category></entry><entry><title>Computational Investing I Notes: Event Studies</title><link href="http://javcasas.github.io/posts/2014/Jun/11/094_event_studies/" rel="alternate"></link><updated>2014-06-11T22:20:00+02:00</updated><author><name>Javier Casas</name></author><id>tag:javcasas.github.io,2014-06-11:posts/2014/Jun/11/094_event_studies/</id><summary type="html">&lt;div class="section" id="event-studies"&gt;
 &lt;h2&gt;094 Event Studies&lt;/h2&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;We need many many events to get some decent charts&lt;/li&gt;
@@ -637,7 +637,7 @@ There are 3 versions of the Efficient Markets Hypotesis:&lt;/p&gt;
 &lt;p&gt;Create event matrix. Columns: date, equity 1, equity 2...&lt;/p&gt;
 &lt;p&gt;Each row shall be filled as 1 if event, nan if not event&lt;/p&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Javier Casas</dc:creator><pubDate>Wed, 11 Jun 2014 22:20:00 +0200</pubDate><guid>tag:javcasas.github.io,2014-06-11:posts/2014/Jun/11/094_event_studies/</guid><category>computational investing</category><category>notes</category></item><item><title>Computational Investing I Notes: QSTK Intro</title><link>http://javcasas.github.io/posts/2014/Jun/11/171_qstk_intro/</link><description>&lt;div class="section" id="qstk-intro"&gt;
+</summary><category term="computational investing"></category><category term="notes"></category></entry><entry><title>Computational Investing I Notes: QSTK Intro</title><link href="http://javcasas.github.io/posts/2014/Jun/11/171_qstk_intro/" rel="alternate"></link><updated>2014-06-11T22:20:00+02:00</updated><author><name>Javier Casas</name></author><id>tag:javcasas.github.io,2014-06-11:posts/2014/Jun/11/171_qstk_intro/</id><summary type="html">&lt;div class="section" id="qstk-intro"&gt;
 &lt;h2&gt;171 QSTK Intro&lt;/h2&gt;
 &lt;pre class="literal-block"&gt;
 import QSTK.qstkutil.qsdateutil as du
@@ -660,7 +660,7 @@ prices = data['close'].values
 normalized_prices = prices / prices[0,:]
 &lt;/pre&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Javier Casas</dc:creator><pubDate>Wed, 11 Jun 2014 22:20:00 +0200</pubDate><guid>tag:javcasas.github.io,2014-06-11:posts/2014/Jun/11/171_qstk_intro/</guid><category>computational investing</category><category>notes</category></item><item><title>K Means Clustering Algorithm</title><link>http://javcasas.github.io/posts/2014/Mar/11/k_means/</link><description>&lt;div class="section" id="introduction"&gt;
+</summary><category term="computational investing"></category><category term="notes"></category></entry><entry><title>K Means Clustering Algorithm</title><link href="http://javcasas.github.io/posts/2014/Mar/11/k_means/" rel="alternate"></link><updated>2014-03-11T22:20:00+01:00</updated><author><name>Javier Casas</name></author><id>tag:javcasas.github.io,2014-03-11:posts/2014/Mar/11/k_means/</id><summary type="html">&lt;div class="section" id="introduction"&gt;
 &lt;h2&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;K Means is an algorithm of the family of unsupervised learning algorithms. It separates a cloud of points into several groups.&lt;/p&gt;
 &lt;/div&gt;
@@ -681,4 +681,4 @@ Repeat until convergence:
 &lt;p&gt;The following Python program implements K Means clustering in a 2D environment. It uses PyGame for visualisation. First it creates several random clouds of points and then it triers to fit several K means to them. Note that not every cloud of points can easily get a K-means clasification, and not every K-means clasification is actually useful.&lt;/p&gt;
 &lt;p&gt;&lt;a class="reference external" href="/downloads/k_means.py"&gt;k_means.py&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Javier Casas</dc:creator><pubDate>Tue, 11 Mar 2014 22:20:00 +0100</pubDate><guid>tag:javcasas.github.io,2014-03-11:posts/2014/Mar/11/k_means/</guid><category>machine learning</category><category>ml</category><category>unsupervised learning</category></item></channel></rss>
+</summary><category term="machine learning"></category><category term="ml"></category><category term="unsupervised learning"></category></entry></feed>
